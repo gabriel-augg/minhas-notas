@@ -1,8 +1,8 @@
 const Footer = () => {
     return(
-        <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+        <footer className="flex justify-center p-5 bg-green-800 text-white">
             <aside>
-                <p>Copyright © 2024 - All right reserved by ACME Industries Ltd</p>
+                <p>Minhas notas, Copyright © 2024 - Todos os direitos reservados.</p>
             </aside>
         </footer>
     )
