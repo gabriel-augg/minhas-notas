@@ -4,7 +4,7 @@ import Login from "../pages/Login";
 const AppRoutes = () => {
     return(
         <Routes>
-            <Route path="/login" element={<Login/>} />
+            <Route path="/entrar" element={<Login/>} />
         </Routes>
     )
 }
