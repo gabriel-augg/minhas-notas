@@ -20,13 +20,13 @@ const Login = () => {
 
                 <Input
                     title="Senha"
-                    type="passoword"
+                    type="password"
                     placeholder="Digite a sua senha"
                 />
 
                 <Input
                     title="Confirmar senha"
-                    type="passoword"
+                    type="password"
                     placeholder="Digite a sua senha novamente"
                 />
 
