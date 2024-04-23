@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 
 import Modal from "../components/Modal"
-import Note from "../components/Note"
 import { RiStickyNoteAddFill } from "react-icons/ri";
 import { FaTags } from "react-icons/fa";
 import { FaSort } from "react-icons/fa6";
 import { NoteContext } from "../contexts/NoteContext";
+import NotesList from "../components/NotesList";
 
 
 export default function Home() {
@@ -87,22 +87,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                { notes.length > 0 ? (
-                    notes.map((note) => {
-                        return(
-                            <Note
-                                key={note.id}
-                                id={note.id}
-                                title={note.title}
-                                description={note.description}
-                                tag={note.tag}
-                                pinned={note.pinned}
-                            />
-                        )
-                    })
-                ) : (
-                    <h1>Carregando...</h1>
-                ) }
+                <NotesList notes={notes} />
             </div>
         </section>
     )
