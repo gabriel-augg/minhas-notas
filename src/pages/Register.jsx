@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form"
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Link } from "react-router-dom";
@@ -10,8 +12,10 @@ const Register = () => {
         resolver: zodResolver(RSchema)
     })
 
-    const handleOnSubmit = (user) => {
-        console.log(user)
+    const { signUp } = useContext(UserContext)
+
+    const handleOnSubmit = async (user) => {
+        await signUp(user)
     }
 
     return (

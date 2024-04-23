@@ -1,12 +1,40 @@
+import { useContext, useEffect, useState } from "react";
+import useRequest from "../hooks/useRequest";
+
 import Modal from "../components/Modal"
 import Note from "../components/Note"
 import { RiStickyNoteAddFill } from "react-icons/ri";
 import { FaTags } from "react-icons/fa";
 import { FaSort } from "react-icons/fa6";
+import { NoteContext } from "../contexts/NoteContext";
+
 
 export default function Home() {
+    const [notes, setNotes] = useState([])
+    const { request } = useRequest()
+    const { setTitle, setDescription, setTag, setPinned } = useContext(NoteContext)
+
+    useEffect(()=>{
+        request("/notes/get-notes", {
+            method: "get"
+        })
+        .then(({data}) => {
+            setNotes(data.notes)
+        })
+    },[])
+
+    function handleAddNote(){
+        setTitle("")
+        setDescription("")
+        setTag("")
+        setPinned(false)
+        document.getElementById('my_modal_2').showModal()
+    }
+
+
+
     return (
-        <section className="h-screen w-3/4 mx-auto mt-7">
+        <section className="w-3/4 mx-auto my-7">
             <h1 className="text-3xl font-bold text-black">Minhas tarefas</h1>
             <Modal />
             <div className="flex justify-between my-4">
@@ -34,28 +62,28 @@ export default function Home() {
                             <li><a>Trabalho</a></li>
                         </ul>
                     </div>
-                    <button onClick={()=>document.getElementById('my_modal_2').showModal()} className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-1 px-2">
+                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-1 px-2">
                         <RiStickyNoteAddFill size={18} />
                         Adicionar
                     </button>
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-                <Note
-                    title="Fazer trabalho da faculdade"
-                    description="Lorem ipsum dolor sit amet consectetur adipisicing elit. At laudantium adipisci beatae obcaecati recusandae ipsa cupiditate."
-                    tag="faculdade"
-                    pinned={true}
-                />
-                <Note
-                    title="Fazer trabalho da faculdade"
-                    description="Lorem ipsum dolor sit amet consectetur adipisicing elit. At laudantium adipisci beatae obcaecati recusandae ipsa cupiditate."
-                    tag="faculdade"
-                />
-                <Note
-                    title="Fazer trabalho da faculdade"
-                    description="Lorem ipsum dolor sit amet consectetur adipisicing elit. At laudantium adipisci beatae obcaecati recusandae ipsa cupiditate."
-                />
+                { notes.length > 0 ? (
+                    notes.map((note) => {
+                        return(
+                            <Note
+                                key={note.id}
+                                title={note.title}
+                                description={note.description}
+                                tag={note.tag}
+                                pinned={note.pinned}
+                            />
+                        )
+                    })
+                ) : (
+                    <h1>Carregando...</h1>
+                ) }
             </div>
         </section>
     )

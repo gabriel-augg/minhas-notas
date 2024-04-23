@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 import { Link } from "react-router-dom";
 import user from "../assets/user.svg"
@@ -6,7 +8,7 @@ import logo from "../assets/logo.svg"
 
 
 const Header = () => {
-    const [authenticated, setAuthenticated] = useState(false)
+    const { authenticated } = useContext(UserContext)
 
 
     return(
