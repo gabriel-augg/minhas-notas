@@ -12,7 +12,7 @@ import { NoteContext } from "../contexts/NoteContext";
 export default function Home() {
     const [notes, setNotes] = useState([])
     const { request } = useRequest()
-    const { setTitle, setDescription, setTag, setPinned } = useContext(NoteContext)
+    const { setTitle, setDescription, setTag, setPinned, setAdd, newNote } = useContext(NoteContext)
 
     useEffect(()=>{
         request("/notes/get-notes", {
@@ -23,7 +23,19 @@ export default function Home() {
         })
     },[])
 
+    useEffect(()=>{
+        if(newNote !== null){
+            if(newNote.pinned){
+
+                setNotes([newNote, ...notes])
+            } else {
+                setNotes(prevNotes => [...prevNotes, newNote])
+            }
+        }
+    },[newNote])
+
     function handleAddNote(){
+        setAdd(true)
         setTitle("")
         setDescription("")
         setTag("")
@@ -34,8 +46,8 @@ export default function Home() {
 
 
     return (
-        <section className="w-3/4 mx-auto my-7">
-            <h1 className="text-3xl font-bold text-black">Minhas tarefas</h1>
+        <section className="min-h-screen w-3/4 mx-auto my-7">
+            <h1 className="text-3xl font-bold text-black">Notas</h1>
             <Modal />
             <div className="flex justify-between my-4">
                 <div>
@@ -74,6 +86,7 @@ export default function Home() {
                         return(
                             <Note
                                 key={note.id}
+                                id={note.id}
                                 title={note.title}
                                 description={note.description}
                                 tag={note.tag}

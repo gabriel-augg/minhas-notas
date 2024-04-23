@@ -9,7 +9,7 @@ import { RiPushpin2Fill } from "react-icons/ri";
 
 
 export default function Modal() {
-    const { title, description, pinned, tag, setTitle, setDescription, setPinned, setTag } = useContext(NoteContext)
+    const { id, title, description, pinned, tag, add, setTitle, setDescription, setPinned, setTag, setNewNote } = useContext(NoteContext)
     const { request } = useRequest()
 
     function handleOnSubmit(e){
@@ -21,13 +21,29 @@ export default function Modal() {
             pinned
         }
 
-        request("/notes/create", {
-            method: "post",
-            data: note
-        })
-        .then((res) => {
+        if(add){
+            request("/notes/create", {
+                method: "post",
+                data: note
+            })
+            .then(({data}) => {
+                console.log(data.note)
+                setNewNote(data.note)
+                document.getElementById('my_modal_2').close()
+            })
+        } else {
+            console.log("EDITANDO")
+            // aqui ja tem o id
+            console.log(id)
+            // request("/notes/create", {
+            //     method: "post",
+            //     data: note
+            // })
+            // .then((res) => {
+            //     document.getElementById('my_modal_2').close()
+            // })
             document.getElementById('my_modal_2').close()
-        })
+        }
     }
 
     return (

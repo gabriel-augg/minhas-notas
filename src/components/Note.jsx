@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { NoteContext } from "../contexts/NoteContext";
 import { RiPushpin2Fill } from "react-icons/ri";
 
-export default function xNote({title, description, tag, pinned}){
+export default function Note({id, title, description, tag, pinned}){
 
-    const { setTitle, setDescription, setTag, setPinned } = useContext(NoteContext)
+    const { setTitle, setDescription, setTag, setPinned, setAdd, setId } = useContext(NoteContext)
 
     function handleShowNote(){
+        setId(id)
+        setAdd(false)
         setTitle(title)
         setDescription(description)
         setTag(tag)
