@@ -46,7 +46,7 @@ const useAuth = () => {
         await authUser(data.token)
     }
 
-    return { authenticated, signUp }
+    return { user, authenticated, signUp }
 
 }
 

@@ -49,10 +49,10 @@ export default function Home() {
         <section className="min-h-screen w-3/4 mx-auto my-7">
             <h1 className="text-3xl font-bold text-black">Notas</h1>
             <Modal />
-            <div className="flex justify-between my-4">
+            <div className="flex justify-between items-center my-4">
                 <div>
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-1 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                             <FaSort size={20}/>
                             Ordenar
                         </div>
@@ -63,9 +63,9 @@ export default function Home() {
                     </div>
 
                 </div>
-                <div className="flex gap-3">
+                <div className="flex items-center gap-3">
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-1 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                             <FaTags size={18} />
                             Tags
                         </div>
@@ -74,7 +74,7 @@ export default function Home() {
                             <li><a>Trabalho</a></li>
                         </ul>
                     </div>
-                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-1 px-2">
+                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                         <RiStickyNoteAddFill size={18} />
                         Adicionar
                     </button>

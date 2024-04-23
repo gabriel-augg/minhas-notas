@@ -81,9 +81,12 @@ export default function Modal() {
                         <option value="escola">Escola</option>
                     </select>
                     <div className="flex items-center gap-4">
-                        <button className="hover:bg-red-100 p-2 rounded-full">
-                            <FaTrash className="text-red-30 text-red-400 transition-all duration-100" size={20} />
-                        </button>
+                        {!add && (
+                            <button className="hover:bg-red-100 p-2 rounded-full">
+                                <FaTrash className="text-red-30 text-red-400 transition-all duration-100" size={20} />
+                            </button>
+                        )}
+
                         <button type="submit" className="bg-lime-900 p-1 px-3 hover:bg-lime-800 text-white rounded-xl font-bold">Salvar</button>
                     </div>
                 </div>
