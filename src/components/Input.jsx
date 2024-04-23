@@ -1,4 +1,6 @@
 export default function Input({title, name, type = "text", placeholder, register, error}){
+
+
     return(
         <div className="flex flex-col">
             <label htmlFor={name} className="text-md text-black font-bold">
@@ -11,7 +13,8 @@ export default function Input({title, name, type = "text", placeholder, register
                 placeholder={placeholder}
                 {...register(name)}
             />
-            <span className="text-red-400 text-sm">{error}</span>
+            {error && <span className="text-red-400 text-sm">{error.message}</span> }
+            
         </div>
     )
 }

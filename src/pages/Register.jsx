@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
+import { RSchema } from "../utils/schema";
 
-const Login = () => {
-    const { register, handleSubmit } = useForm()
+const Register = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(RSchema)
+    })
 
     const handleOnSubmit = (user) => {
         console.log(user)
@@ -12,7 +16,7 @@ const Login = () => {
 
     return (
         <section className="h-screen flex justify-center">
-            <form onSubmit={handleSubmit(handleOnSubmit)} className="flex flex-col min-w-96 gap-3 mt-5">
+            <form onSubmit={handleSubmit(handleOnSubmit)} className="flex flex-col min-w-96 gap-3 mx-5">
 
                 <h1 className="text-2xl text-center my-5 font-bold text-black">Meu primeiro acesso</h1>
 
@@ -21,6 +25,7 @@ const Login = () => {
                     placeholder="Digite o seu nome de usuário"
                     name="username"
                     register={register}
+                    error={errors.username}
                 />
 
                 <Input
@@ -28,6 +33,7 @@ const Login = () => {
                     placeholder="Digite o seu email"
                     name="email"
                     register={register}
+                    error={errors.email}
                 />
 
                 <Input
@@ -36,6 +42,7 @@ const Login = () => {
                     placeholder="Digite a sua senha"
                     name="password"
                     register={register}
+                    error={errors.password}
                 />
 
                 <Input
@@ -44,6 +51,7 @@ const Login = () => {
                     placeholder="Digite a sua senha novamente"
                     name="confirmpassword"
                     register={register}
+                    error={errors.confirmpassword}
                 />
 
                 <button
@@ -60,4 +68,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default Register;
