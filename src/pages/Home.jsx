@@ -24,10 +24,6 @@ export default function Home() {
 
                 </div>
                 <div className="flex gap-3">
-                    {/* <button className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-1 px-2">
-                        <FaTags size={18} />
-                        Tags
-                    </button> */}
                     <div className="dropdown dropdown-hover">
                         <div tabIndex={0} role="button" className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-1 px-2">
                             <FaTags size={18} />
@@ -48,12 +44,13 @@ export default function Home() {
                 <Note
                     title="Fazer trabalho da faculdade"
                     description="Lorem ipsum dolor sit amet consectetur adipisicing elit. At laudantium adipisci beatae obcaecati recusandae ipsa cupiditate."
-                    category="faculdade"
+                    tag="faculdade"
+                    pinned={true}
                 />
                 <Note
                     title="Fazer trabalho da faculdade"
                     description="Lorem ipsum dolor sit amet consectetur adipisicing elit. At laudantium adipisci beatae obcaecati recusandae ipsa cupiditate."
-                    category="faculdade"
+                    tag="faculdade"
                 />
                 <Note
                     title="Fazer trabalho da faculdade"
