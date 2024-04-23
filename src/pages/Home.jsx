@@ -1,18 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 
+
 import Modal from "../components/Modal"
 import { RiStickyNoteAddFill } from "react-icons/ri";
 import { FaTags } from "react-icons/fa";
 import { FaSort } from "react-icons/fa6";
+import { IoIosAddCircle } from "react-icons/io";
 import { NoteContext } from "../contexts/NoteContext";
 import NotesList from "../components/NotesList";
+import Tag from "../components/Tag";
+import TagsList from "../components/TagsList";
 
 
 export default function Home() {
     const [notes, setNotes] = useState([])
     const { request } = useRequest()
     const { setTitle, setDescription, setTag, setPinned, setAdd, newNote } = useContext(NoteContext)
+
+    const tags = [
+        {id: 1, title: "faculdade"},
+        {id: 2, title: "trabalho"}
+    ]
 
     useEffect(()=>{
         request("/notes/get-notes", {
@@ -58,7 +67,7 @@ export default function Home() {
             <div className="flex justify-between items-center my-4">
                 <div>
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                             <FaSort size={20}/>
                             Ordenar
                         </div>
@@ -71,16 +80,22 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                             <FaTags size={18} />
                             Tags
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-lime-900 text-white rounded-box w-52">
-                            <li><a>Faculdade</a></li>
-                            <li><a>Trabalho</a></li>
+                        <ul tabIndex={0} className="dropdown-content z-[1] p-2 shadow bg-lime-900 text-white rounded-box w-52">
+                            <li>
+                                <button className="flex items-center w-full bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                                    <IoIosAddCircle size={15} />
+                                    Adicionar
+                                </button>
+                            </li>
+                            <TagsList tags={tags} />
+
                         </ul>
                     </div>
-                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                         <RiStickyNoteAddFill size={18} />
                         Adicionar
                     </button>
