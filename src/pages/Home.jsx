@@ -20,7 +20,8 @@ export default function Home() {
 
     const tags = [
         {id: 1, title: "faculdade"},
-        {id: 2, title: "trabalho"}
+        {id: 2, title: "trabalho"},
+        {id: 3, title: "trabalho trabalho trabalho"}
     ]
 
     useEffect(()=>{
