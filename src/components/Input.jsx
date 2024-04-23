@@ -1,6 +1,5 @@
 export default function Input({title, name, type = "text", placeholder, register, error}){
 
-
     return(
         <div className="flex flex-col">
             <label htmlFor={name} className="text-md text-black font-bold">

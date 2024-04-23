@@ -26,10 +26,16 @@ export default function Home() {
     useEffect(()=>{
         if(newNote !== null){
             if(newNote.pinned){
-
-                setNotes([newNote, ...notes])
+                setNotes(prevNotes => [newNote, ...prevNotes])
             } else {
-                setNotes(prevNotes => [...prevNotes, newNote])
+                setNotes(prevNotes => {
+                    const pinnedNotes = prevNotes.filter(note => note.pinned);
+                    const otherNotes = prevNotes.filter(note => !note.pinned);
+
+                    const updatedNotes = [...pinnedNotes, newNote, ...otherNotes, ];
+
+                    return updatedNotes;
+                  });
             }
         }
     },[newNote])
@@ -80,7 +86,7 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 { notes.length > 0 ? (
                     notes.map((note) => {
                         return(
