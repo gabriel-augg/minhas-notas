@@ -74,7 +74,7 @@ export default function Modal() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Nota"
-                    className="bg-transparent placeholder-lime-700 py-4 text-black w-full resize-none outline-none overflow-hidden h-auto"
+                    className="bg-transparent placeholder-lime-700 py-4 text-black w-full resize-none outline-none overflow-hidden"
                 />
                 <div className="flex mt-5 justify-between">
                     {/* <div class="relative">

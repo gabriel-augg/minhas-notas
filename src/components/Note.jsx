@@ -27,7 +27,7 @@ export default function Note({id, title, description, tag, pinned}){
                     <RiPushpin2Fill className="text-lime-800" size={25} />
                 )}
             </div>
-            {!title && !description && <h1 className="text-lime-700 font-bold text-md">Nota vazia</h1>}
+            {!title && !description && <h1 className="text-lime-700 font-bold text-xl">Nota vazia</h1>}
             <p className="text-black text-md mb-2">{description}</p>
 
             {tag && (
