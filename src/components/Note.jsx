@@ -20,7 +20,7 @@ export default function Note({id, title, description, tag, pinned}){
 
 
     return(
-        <article onClick={handleShowNote} className="bg-lime-200 p-4 rounded-xl cursor-pointer border hover:border-lime-500 drop-shadow-md flex-1">
+        <article onClick={handleShowNote} className="bg-lime-200 p-4 rounded-xl cursor-pointer border hover:border-lime-500 drop-shadow-md h-fit min-h-28">
             <div className="flex justify-between">
                 <h1 className="text-black font-bold text-xl mb-3">{title}</h1>
                 {pinned && (
