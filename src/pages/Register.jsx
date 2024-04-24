@@ -19,7 +19,7 @@ const Register = () => {
     }
 
     return (
-        <section className="h-screen flex">
+        <section className="h-screen flex justify-center">
             <form onSubmit={handleSubmit(handleOnSubmit)} className="flex flex-col min-w-96 gap-3 mx-5">
 
                 <h1 className="text-2xl text-center my-5 font-bold text-black">Meu primeiro acesso</h1>
