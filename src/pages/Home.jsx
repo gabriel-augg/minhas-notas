@@ -14,9 +14,8 @@ import { UserContext } from "../contexts/UserContext";
 
 
 export default function Home() {
-    const [notes, setNotes] = useState([])
     const { request } = useRequest()
-    const { setIsCreation, newNote } = useContext(NoteContext)
+    const { notes, setNotes, setIsCreation, setCurrentNote } = useContext(NoteContext)
     const { authenticated } = useContext(UserContext)
 
 
@@ -32,34 +31,24 @@ export default function Home() {
                 method: "get"
             })
 
-            console.log(response.data.notes)
             setNotes(response.data.notes)
         }
 
-        
         authenticated && fetchNotes()
 
     },[authenticated])
 
-    useEffect(()=>{
-        if(newNote !== null){
-            if(newNote.pinned){
-                setNotes(prevNotes => [newNote, ...prevNotes])
-            } else {
-                setNotes(prevNotes => {
-                    const pinnedNotes = prevNotes.filter(note => note.pinned);
-                    const otherNotes = prevNotes.filter(note => !note.pinned);
-
-                    const updatedNotes = [...pinnedNotes, newNote, ...otherNotes, ];
-
-                    return updatedNotes;
-                  });
-            }
-        }
-    },[newNote])
-
     function handleAddNote(){
         setIsCreation(true)
+        setCurrentNote({
+            id: "",
+            pinned: false,
+            title: "",
+            description: "",
+            tag: "",
+            createdAt: "",
+            updatedAt: ""
+        })
         document.getElementById('my_modal_2').showModal()
     }
 

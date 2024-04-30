@@ -10,32 +10,22 @@ import { IoMdPricetags } from "react-icons/io";
 
 
 export default function Modal() {
-    const { isCreation, currentNote, setCurrentNote } = useContext(NoteContext)
+    const { isCreation, currentNote, setCurrentNote, addNewNote } = useContext(NoteContext)
     const { request } = useRequest()
 
     async function handleOnSubmit(e) {
         e.preventDefault()
-
-        // console.log(currentNote)
 
         const response = await request(`${isCreation ? "/notes/create" : `/notes/update/${currentNote.id}`}`, {
             method: "post",
             data: currentNote
         })
 
-        // console.log(response.data)
-        setCurrentNote({
-            id: "",
-            pinned: false,
-            title: "",
-            description: "",
-            tag: "",
-            createdAt: "",
-            updatedAt: ""
-        })
+        addNewNote(response.data.note)
 
         document.getElementById('my_modal_2').close()
     }
+
 
     function handleInput(e){
         setCurrentNote(prevCurrentNote => ({
