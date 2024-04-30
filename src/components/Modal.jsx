@@ -51,7 +51,24 @@ export default function Modal() {
                 return note;
             });
         });
+    }
 
+    async function deleteNote(){
+        setIsLoading(true)
+        await request(`/notes/delete/${currentModalValues.id}`, {
+            method: "delete"
+        })
+
+        setNotes(prevNotes => {
+            const notes = prevNotes.filter(note => note.id !== currentModalValues.id);
+            return [...notes];
+        });
+
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2000)
+
+        document.getElementById('my_modal_2').close()
     }
 
 
@@ -63,10 +80,10 @@ export default function Modal() {
         } else {
             await updateNote();
         }
-        document.getElementById('my_modal_2').close()
         setTimeout(() => {
             setIsLoading(false)
         }, 2000)
+        document.getElementById('my_modal_2').close()
     }
 
 
@@ -140,7 +157,7 @@ export default function Modal() {
 
                     <div className="flex items-center gap-4">
                         {!isCreation && (
-                            <button className="hover:bg-red-100 p-2 rounded-full">
+                            <button type="button" onClick={deleteNote} className="hover:bg-red-100 p-2 rounded-full">
                                 <FaTrash className="text-red-30 text-red-400 transition-all duration-100" size={20} />
                             </button>
                         )}
