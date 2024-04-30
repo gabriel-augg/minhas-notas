@@ -9,14 +9,16 @@ import { FaSort } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 import { NoteContext } from "../contexts/NoteContext";
 import NotesList from "../components/NotesList";
-import Tag from "../components/Tag";
 import TagsList from "../components/TagsList";
+import { UserContext } from "../contexts/UserContext";
 
 
 export default function Home() {
     const [notes, setNotes] = useState([])
     const { request } = useRequest()
-    const { setTitle, setDescription, setTag, setPinned, setAdd, newNote } = useContext(NoteContext)
+    const { setIsCreation, newNote } = useContext(NoteContext)
+    const { authenticated } = useContext(UserContext)
+
 
     const tags = [
         {id: 1, title: "faculdade"},
@@ -25,13 +27,19 @@ export default function Home() {
     ]
 
     useEffect(()=>{
-        request("/notes/get-notes", {
-            method: "get"
-        })
-        .then(({data}) => {
-            setNotes(data.notes)
-        })
-    },[])
+        async function fetchNotes(){
+            const response = await request("/notes/get-notes", {
+                method: "get"
+            })
+
+            console.log(response.data.notes)
+            setNotes(response.data.notes)
+        }
+
+        
+        authenticated && fetchNotes()
+
+    },[authenticated])
 
     useEffect(()=>{
         if(newNote !== null){
@@ -51,11 +59,7 @@ export default function Home() {
     },[newNote])
 
     function handleAddNote(){
-        setAdd(true)
-        setTitle("")
-        setDescription("")
-        setTag("")
-        setPinned(false)
+        setIsCreation(true)
         document.getElementById('my_modal_2').showModal()
     }
 

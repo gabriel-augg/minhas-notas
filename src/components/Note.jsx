@@ -4,15 +4,17 @@ import { RiPushpin2Fill } from "react-icons/ri";
 
 export default function Note({id, title, description, tag, pinned}){
 
-    const { setTitle, setDescription, setTag, setPinned, setAdd, setId } = useContext(NoteContext)
+    const { setCurrentNote } = useContext(NoteContext)
 
-    function handleShowNote(){
-        setId(id)
-        setAdd(false)
-        setTitle(title)
-        setDescription(description)
-        setTag(tag)
-        setPinned(pinned)
+    function handleShowModal(){
+
+        setCurrentNote({
+            id,
+            title,
+            description,
+            tag,
+            pinned
+        })
 
         document.getElementById('my_modal_2').showModal()
 
@@ -20,7 +22,7 @@ export default function Note({id, title, description, tag, pinned}){
 
 
     return(
-        <article onClick={handleShowNote} className="bg-lime-200 p-4 rounded-xl cursor-pointer border hover:border-lime-500 drop-shadow-md h-fit min-h-28">
+        <article onClick={handleShowModal} className="bg-lime-200 p-4 rounded-xl cursor-pointer border hover:border-lime-500 drop-shadow-md h-fit min-h-28">
             <div className="flex justify-between">
                 <h1 className="text-black font-bold text-xl mb-3">{title}</h1>
                 {pinned && (

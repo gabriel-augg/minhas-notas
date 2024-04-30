@@ -4,16 +4,17 @@ export const NoteContext = createContext()
 
 
 export function NoteProvider({children}){
-    const [id, setId] = useState(null)
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [pinned, setPinned] = useState(false)
-    const [tag, setTag] = useState("")
-    const [add, setAdd] = useState(false)
+    const [currentNote, setCurrentNote] = useState({
+        pinned: false,
+        title: "",
+        description: "",
+        tag: ""
+    })
+    const [isCreation, setIsCreation] = useState(false)
     const [newNote, setNewNote] = useState(null)
 
     return(
-        <NoteContext.Provider value={{ id, title, description, pinned, tag, add, newNote, setTitle, setDescription, setPinned, setTag, setAdd, setId, setNewNote }}>
+        <NoteContext.Provider value={{ currentNote, isCreation, newNote, setIsCreation, setNewNote, setCurrentNote }}>
             {children}
         </NoteContext.Provider>
     )

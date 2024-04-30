@@ -46,7 +46,13 @@ const useAuth = () => {
         await authUser(data.token)
     }
 
-    return { user, authenticated, signUp }
+    function signOut(){
+        setAuthenticated(false)
+        localStorage.removeItem('token')
+        api.defaults.headers.Authorization = undefined
+    }
+
+    return { user, authenticated, signUp, signOut }
 
 }
 
