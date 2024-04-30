@@ -10,34 +10,73 @@ import { IoMdPricetags } from "react-icons/io";
 
 
 export default function Modal() {
-    const { isCreation, currentNote, setCurrentNote, addNewNote } = useContext(NoteContext)
+    const { isCreation, currentModalValues, setCurrentModalValues, setNotes } = useContext(NoteContext)
     const { request } = useRequest()
+
+
+    async function createNote() {
+        const response = await request("/notes/create", {
+            method: "post",
+            data: currentModalValues
+        });
+    
+        const note = response.data.note;
+    
+        if (note.pinned) {
+            setNotes(prevNotes => [note, ...prevNotes]);
+        } else {
+            setNotes(prevNotes => {
+                const pinnedNotes = prevNotes.filter(note => note.pinned);
+                const otherNotes = prevNotes.filter(note => !note.pinned);
+                const updatedNotes = [...pinnedNotes, note, ...otherNotes];
+                return updatedNotes;
+            });
+        }
+    
+    }
+    
+    async function updateNote() {
+        const response = await request(`/notes/update/${currentModalValues.id}`, {
+            method: "put",
+            data: currentModalValues
+        });
+    
+        const updatedNote = response.data.note;
+    
+        setNotes(prevValues => {
+            return prevValues.map(note => {
+                if (note.id === updatedNote.id) {
+                    return { ...note, ...updatedNote };
+                }
+                return note;
+            });
+        });
+
+    }
+
 
     async function handleOnSubmit(e) {
         e.preventDefault()
-
-        const response = await request(`${isCreation ? "/notes/create" : `/notes/update/${currentNote.id}`}`, {
-            method: "post",
-            data: currentNote
-        })
-
-        addNewNote(response.data.note)
-
+        if(isCreation) {
+            createNote();
+        } else {
+            updateNote();
+        }
         document.getElementById('my_modal_2').close()
     }
 
 
     function handleInput(e){
-        setCurrentNote(prevCurrentNote => ({
-            ...prevCurrentNote,
+        setCurrentModalValues(prevValues => ({
+            ...prevValues,
             [e.target.name]: e.target.value
         }))
     }
 
     function handlePinned(){
-        setCurrentNote(prevCurrentNote => ({
-            ...prevCurrentNote,
-            pinned: !prevCurrentNote.pinned
+        setCurrentModalValues(prevValues => ({
+            ...prevValues,
+            pinned: !prevValues.pinned
         }))
     }
 
@@ -50,11 +89,11 @@ export default function Modal() {
                         className="bg-transparent placeholder-lime-700 text-lg text-black font-bold w-full outline-none"
                         name="title"
                         placeholder="Título"
-                        value={currentNote.title}
+                        value={currentModalValues.title}
                         onChange={handleInput}
                     />
                     <button className="hover:bg-lime-100 p-1 rounded-full" type="button" onClick={handlePinned}>
-                        {currentNote.pinned ? (
+                        {currentModalValues.pinned ? (
                             <RiPushpin2Fill className="text-lime-800" size={30} />
                         ) : (
                             <RiPushpin2Line className="text-lime-800" size={30} />
@@ -65,7 +104,7 @@ export default function Modal() {
                 <textarea
                     type="text"
                     name="description"
-                    value={currentNote.description}
+                    value={currentModalValues.description}
                     onChange={handleInput}
                     placeholder="Nota"
                     className="bg-transparent placeholder-lime-700 py-4 text-black w-full resize-none outline-none overflow-hidden"

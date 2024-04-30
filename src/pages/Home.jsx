@@ -15,7 +15,7 @@ import { UserContext } from "../contexts/UserContext";
 
 export default function Home() {
     const { request } = useRequest()
-    const { notes, setNotes, setIsCreation, setCurrentNote } = useContext(NoteContext)
+    const { notes, setNotes, setIsCreation, setCurrentModalValues } = useContext(NoteContext)
     const { authenticated } = useContext(UserContext)
 
 
@@ -40,7 +40,7 @@ export default function Home() {
 
     function handleAddNote(){
         setIsCreation(true)
-        setCurrentNote({
+        setCurrentModalValues({
             id: "",
             pinned: false,
             title: "",
