@@ -10,7 +10,7 @@ import { IoMdPricetags } from "react-icons/io";
 
 
 export default function Modal() {
-    const { isCreation, currentModalValues, setCurrentModalValues, setNotes } = useContext(NoteContext)
+    const { isCreation, currentModalValues, setCurrentModalValues, setNotes, setIsLoading } = useContext(NoteContext)
     const { request } = useRequest()
 
 
@@ -56,13 +56,17 @@ export default function Modal() {
 
 
     async function handleOnSubmit(e) {
+        setIsLoading(true)
         e.preventDefault()
         if(isCreation) {
-            createNote();
+            await createNote();
         } else {
-            updateNote();
+            await updateNote();
         }
         document.getElementById('my_modal_2').close()
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2000)
     }
 
 

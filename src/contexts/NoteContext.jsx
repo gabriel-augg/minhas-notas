@@ -11,10 +11,11 @@ export function NoteProvider({children}){
         description: "",
         tag: ""
     })
+    const [isLoading, setIsLoading] = useState(false)
 
 
     return(
-        <NoteContext.Provider value={{ notes, currentModalValues, isCreation, setNotes, setCurrentModalValues, setIsCreation }}>
+        <NoteContext.Provider value={{ notes, currentModalValues, isCreation, isLoading, setNotes, setCurrentModalValues, setIsCreation, setIsLoading }}>
             {children}
         </NoteContext.Provider>
     )

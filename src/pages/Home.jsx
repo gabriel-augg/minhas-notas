@@ -15,7 +15,7 @@ import { UserContext } from "../contexts/UserContext";
 
 export default function Home() {
     const { request } = useRequest()
-    const { notes, setNotes, setIsCreation, setCurrentModalValues } = useContext(NoteContext)
+    const { notes, setNotes, setIsCreation, setCurrentModalValues, isLoading } = useContext(NoteContext)
     const { authenticated } = useContext(UserContext)
 
 
@@ -59,7 +59,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold text-black">Notas</h1>
             <Modal />
             <div className="flex justify-between items-center my-4">
-                <div>
+                <div className="flex items-center gap-4">
                     <div className="dropdown dropdown-hover">
                         <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                             <FaSort size={20}/>
@@ -70,6 +70,9 @@ export default function Home() {
                             <li><a>Trabalho</a></li>
                         </ul>
                     </div>
+                    { isLoading && (
+                        <span className="loading loading-spinner loading-md bg-lime-700"></span>
+                    ) }
 
                 </div>
                 <div className="flex items-center gap-3">
