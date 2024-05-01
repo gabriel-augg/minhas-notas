@@ -136,7 +136,6 @@ export default function Modal() {
                     name="description"
                     value={currentModalValues.description}
                     onChange={handleInput}
-                    rows={30}
                     placeholder="Nota"
                     className="bg-transparent placeholder-lime-700 py-4 text-black w-full resize-none outline-none overflow-hidden"
                 />

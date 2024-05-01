@@ -5,25 +5,30 @@ import user_icon from "../assets/user.svg"
 import { MdOutlineExitToApp } from "react-icons/md";
 import { FaUserCog } from "react-icons/fa";
 import { FaUserTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import useRequest from "../hooks/useRequest";
 
 
 export default function User({ username }) {
-
     const { signOut } = useContext(UserContext)
+    const { request } = useRequest()
+    const navigate = useNavigate()
 
-    function closeDropdown(){
-        var dropdown = document.getElementById("user_dropdown")
-        console.log(dropdown)
-        dropdown.classList.remove("dropdown-open")
 
+    async function handleDeleteAccount(){
+        navigate("/cadastrar")
+        
+        await request("/users/delete-user", {
+            method: "delete"
+        })
+
+        signOut()
 
     }
 
-    function logout(){
-        alert("EITA!")
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-        closeDropdown()
+    function handleLogout(){
+        navigate("/cadastrar")
+        signOut()
     }
 
     return (
@@ -43,7 +48,7 @@ export default function User({ username }) {
 
                             </div>
                         </li>
-                        <li>
+                        <li onClick={handleDeleteAccount}>
                             <div className="flex items-center justify-start p-1">
                                 <button>
                                     <FaUserTimes size={20} />
@@ -52,7 +57,7 @@ export default function User({ username }) {
 
                             </div>
                         </li>
-                        <li onClick={() => logout()}>
+                        <li onClick={handleLogout}>
                             <div className="flex items-center justify-start p-1">
                                 <button>
                                     <MdOutlineExitToApp size={20} />
