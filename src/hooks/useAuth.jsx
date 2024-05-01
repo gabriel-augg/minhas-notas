@@ -35,23 +35,35 @@ const useAuth = () => {
   }
 
   async function signIn(body) {
-    const { data } = await request("/auth/sign-in", {
+    const response = await request("/auth/sign-in", {
       method: "post",
       data: body,
     });
 
-    await authUser(data.token);
+    if(response){
+        await authUser(response.data.token);
+    }
   }
 
-  async function signUp(user) {
-    const { data } = await request("/auth/sign-up", {
+  async function signUp(body) {
+    const response = await request("/auth/sign-up", {
       method: "post",
-      data: user,
+      data: body,
     });
-    await authUser(data.token);
+
+    if(response){
+        await authUser(response.data.token);
+    }
+
   }
 
-  return { user, authenticated, signUp, signIn };
+    function signOut(){
+        setAuthenticated(false)
+        localStorage.removeItem('token')
+        api.defaults.headers.Authorization = undefined
+    }
+
+  return { user, authenticated, signUp, signIn, signOut };
 };
 
 export default useAuth;

@@ -16,7 +16,7 @@ export default function User({ username }) {
 
 
     async function handleDeleteAccount(){
-        navigate("/cadastrar")
+        navigate("/login")
         
         await request("/users/delete-user", {
             method: "delete"
@@ -27,7 +27,7 @@ export default function User({ username }) {
     }
 
     function handleLogout(){
-        navigate("/cadastrar")
+        navigate("/login")
         signOut()
     }
 
