@@ -62,7 +62,7 @@ export default function Home() {
             <div className="flex justify-between items-center my-4">
                 <div className="flex items-center gap-4">
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold px-2">
                             <FaSort size={20}/>
                             Ordenar
                         </div>
@@ -72,13 +72,13 @@ export default function Home() {
                         </ul>
                     </div>
                     { isLoading && (
-                        <span className="loading loading-spinner loading-md bg-lime-700"></span>
+                        <span className="loading loading-spinner loading-sm bg-lime-700"></span>
                     ) }
 
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold px-2">
                             <FaTags size={18} />
                             Tags
                         </div>
@@ -93,7 +93,7 @@ export default function Home() {
 
                         </ul>
                     </div>
-                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold px-2">
                         <RiStickyNoteAddFill size={18} />
                         Adicionar
                     </button>
