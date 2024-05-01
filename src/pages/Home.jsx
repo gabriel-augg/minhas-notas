@@ -11,6 +11,7 @@ import { NoteContext } from "../contexts/NoteContext";
 import NotesList from "../components/NotesList";
 import TagsList from "../components/TagsList";
 import { UserContext } from "../contexts/UserContext";
+import NoNote from "../components/NoNote";
 
 
 export default function Home() {
@@ -98,9 +99,12 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            { notes.length > 0 ? (
                 <NotesList notes={notes} />
-            </div>
+            ) : (
+                <NoNote />
+            )}
+
         </section>
     )
 }
