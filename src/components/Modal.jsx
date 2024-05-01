@@ -19,41 +19,50 @@ export default function Modal() {
             method: "post",
             data: currentModalValues
         });
-    
+
         const note = response.data.note;
-    
+
         if (note.pinned) {
             setNotes(prevNotes => [note, ...prevNotes]);
         } else {
             setNotes(prevNotes => {
                 const pinnedNotes = prevNotes.filter(note => note.pinned);
                 const otherNotes = prevNotes.filter(note => !note.pinned);
-                const updatedNotes = [...pinnedNotes, note, ...otherNotes];
-                return updatedNotes;
+                return [...pinnedNotes, note, ...otherNotes];
             });
         }
-    
+
     }
-    
+
     async function updateNote() {
         const response = await request(`/notes/update/${currentModalValues.id}`, {
             method: "put",
             data: currentModalValues
         });
-    
+
         const updatedNote = response.data.note;
-    
-        setNotes(prevValues => {
-            return prevValues.map(note => {
+
+        setNotes(prevNotes => {
+            const updatedNotes = prevNotes.map(note => {
                 if (note.id === updatedNote.id) {
                     return { ...note, ...updatedNote };
                 }
                 return note;
             });
+
+            const pinnedNoteIndex = updatedNotes.findIndex(note => note.id === updatedNote.id && updatedNote.pinned);
+
+            if (pinnedNoteIndex !== -1) {
+                const pinnedNote = updatedNotes.splice(pinnedNoteIndex, 1)[0];
+                updatedNotes.unshift(pinnedNote);
+            }
+
+            return updatedNotes;
         });
+
     }
 
-    async function deleteNote(){
+    async function deleteNote() {
         setIsLoading(true)
         await request(`/notes/delete/${currentModalValues.id}`, {
             method: "delete"
@@ -75,7 +84,7 @@ export default function Modal() {
     async function handleOnSubmit(e) {
         setIsLoading(true)
         e.preventDefault()
-        if(isCreation) {
+        if (isCreation) {
             await createNote();
         } else {
             await updateNote();
@@ -87,14 +96,14 @@ export default function Modal() {
     }
 
 
-    function handleInput(e){
+    function handleInput(e) {
         setCurrentModalValues(prevValues => ({
             ...prevValues,
             [e.target.name]: e.target.value
         }))
     }
 
-    function handlePinned(){
+    function handlePinned() {
         setCurrentModalValues(prevValues => ({
             ...prevValues,
             pinned: !prevValues.pinned
@@ -107,7 +116,7 @@ export default function Modal() {
                 <div className="flex">
                     <input
                         type="text"
-                        className="bg-transparent placeholder-lime-700 text-lg text-black font-bold w-full outline-none"
+                        className="bg-transparent placeholder-lime-700 text-lg text-black font-bold w-full outline-none p-text-area"
                         name="title"
                         placeholder="Título"
                         value={currentModalValues.title}
@@ -127,6 +136,7 @@ export default function Modal() {
                     name="description"
                     value={currentModalValues.description}
                     onChange={handleInput}
+                    rows={30}
                     placeholder="Nota"
                     className="bg-transparent placeholder-lime-700 py-4 text-black w-full resize-none outline-none overflow-hidden"
                 />
