@@ -15,10 +15,14 @@ export default function User({ username }) {
         var dropdown = document.getElementById("user_dropdown")
         console.log(dropdown)
         dropdown.classList.remove("dropdown-open")
+
+
     }
 
     function logout(){
         alert("EITA!")
+        localStorage.removeItem("token");
+        window.location.href = "/login";
         closeDropdown()
     }
 
