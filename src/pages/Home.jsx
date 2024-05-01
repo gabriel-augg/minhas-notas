@@ -9,14 +9,16 @@ import { FaSort } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 import { NoteContext } from "../contexts/NoteContext";
 import NotesList from "../components/NotesList";
-import Tag from "../components/Tag";
 import TagsList from "../components/TagsList";
+import { UserContext } from "../contexts/UserContext";
+import NoNote from "../components/NoNote";
 
 
 export default function Home() {
-    const [notes, setNotes] = useState([])
     const { request } = useRequest()
-    const { setTitle, setDescription, setTag, setPinned, setAdd, newNote } = useContext(NoteContext)
+    const { notes, setNotes, setIsCreation, setCurrentModalValues, isLoading } = useContext(NoteContext)
+    const { authenticated } = useContext(UserContext)
+
 
     const tags = [
         {id: 1, title: "faculdade"},
@@ -25,37 +27,29 @@ export default function Home() {
     ]
 
     useEffect(()=>{
-        request("/notes/get-notes", {
-            method: "get"
-        })
-        .then(({data}) => {
-            setNotes(data.notes)
-        })
-    },[])
+        async function fetchNotes(){
+            const response = await request("/notes/get-notes", {
+                method: "get"
+            })
 
-    useEffect(()=>{
-        if(newNote !== null){
-            if(newNote.pinned){
-                setNotes(prevNotes => [newNote, ...prevNotes])
-            } else {
-                setNotes(prevNotes => {
-                    const pinnedNotes = prevNotes.filter(note => note.pinned);
-                    const otherNotes = prevNotes.filter(note => !note.pinned);
-
-                    const updatedNotes = [...pinnedNotes, newNote, ...otherNotes, ];
-
-                    return updatedNotes;
-                  });
-            }
+            setNotes(response.data.notes)
         }
-    },[newNote])
+
+        authenticated && fetchNotes()
+
+    },[authenticated])
 
     function handleAddNote(){
-        setAdd(true)
-        setTitle("")
-        setDescription("")
-        setTag("")
-        setPinned(false)
+        setIsCreation(true)
+        setCurrentModalValues({
+            id: "",
+            pinned: false,
+            title: "",
+            description: "",
+            tag: "",
+            createdAt: "",
+            updatedAt: ""
+        })
         document.getElementById('my_modal_2').showModal()
     }
 
@@ -66,9 +60,9 @@ export default function Home() {
             <h1 className="text-3xl font-bold text-black">Notas</h1>
             <Modal />
             <div className="flex justify-between items-center my-4">
-                <div>
+                <div className="flex items-center gap-4">
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold px-2">
                             <FaSort size={20}/>
                             Ordenar
                         </div>
@@ -77,11 +71,14 @@ export default function Home() {
                             <li><a>Trabalho</a></li>
                         </ul>
                     </div>
+                    { isLoading && (
+                        <span className="loading loading-spinner loading-sm bg-lime-700"></span>
+                    ) }
 
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold px-2">
                             <FaTags size={18} />
                             Tags
                         </div>
@@ -96,15 +93,18 @@ export default function Home() {
 
                         </ul>
                     </div>
-                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                    <button onClick={handleAddNote} className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold px-2">
                         <RiStickyNoteAddFill size={18} />
                         Adicionar
                     </button>
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            { notes.length > 0 ? (
                 <NotesList notes={notes} />
-            </div>
+            ) : (
+                <NoNote />
+            )}
+
         </section>
     )
 }
