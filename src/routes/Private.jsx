@@ -9,7 +9,7 @@ const Private = ({children}) => {
 
     useEffect(()=>{
         if(!authenticated) {
-            navigate("/cadastrar")
+            navigate("/login")
         }
     },[authenticated])
 
