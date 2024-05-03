@@ -63,7 +63,7 @@ const useAuth = () => {
         api.defaults.headers.Authorization = undefined
     }
 
-  return { user, authenticated, signUp, signIn, signOut };
+  return { user, setUser, authenticated, signUp, signIn, signOut };
 };
 
 export default useAuth;

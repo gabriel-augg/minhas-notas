@@ -25,4 +25,14 @@ const Loginchema = z.object({
   password: z.string().min(4, "A senha deve ter pelo menos 8 caracteres."),
 });
 
-export { RSchema, Loginchema };
+const EditSchema = z.object({
+  username: z.string().min(3, "O nome de usuário deve ter pelo menos 3 caracteres.").max(20, "O nome de usuário não pode ser maior que 20 caracteres."),
+
+  email: z.string().email("Digite um email válido."),
+
+  password: z.string(),
+  
+  confirmpassword: z.string()
+})
+
+export { RSchema, EditSchema, Loginchema };

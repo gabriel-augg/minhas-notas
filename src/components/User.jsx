@@ -14,6 +14,10 @@ export default function User({ username }) {
     const { request } = useRequest()
     const navigate = useNavigate()
 
+    function handleEditUser(){
+        navigate("/editar")
+    }
+
 
     async function handleDeleteAccount(){
         navigate("/login")
@@ -39,7 +43,7 @@ export default function User({ username }) {
                 <div className="dropdown dropdown-hover" id="user_dropdown">
                     <div tabIndex={0} role="button" className="bg-lime-500 flex justify-center text-sm text-white rounded-xl font-bold px-1">Conta</div>
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-lime-900 text-white rounded-box w-40">
-                        <li>
+                        <li onClick={handleEditUser}>
                             <div className="flex items-center justify-start p-1">
                                 <button>
                                     <FaUserCog size={20} />
