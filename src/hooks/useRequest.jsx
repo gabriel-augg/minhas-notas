@@ -1,4 +1,5 @@
 import api from "../utils/api"
+import { toast } from 'react-toastify';
 
 const useRequest = () => {
     async function request(url, options){
@@ -11,7 +12,8 @@ const useRequest = () => {
             
             return response
         } catch (error) {
-
+            const message = error.response.data.message
+            toast.error(message)
         }
     }
 
