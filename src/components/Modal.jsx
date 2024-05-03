@@ -140,17 +140,6 @@ export default function Modal() {
                     className="bg-transparent placeholder-lime-700 py-4 text-black w-full resize-none outline-none overflow-hidden"
                 />
                 <div className="flex mt-5 justify-between">
-                    {/* <div className="relative">
-                        <div className="absolute inset-y-0 left-0 flex items-center px-2 text-white pointer-events-none">
-                            <IoMdPricetags size={18} />
-                        </div>
-                        <select className="block appearance-none pl-8 py-1 bg-lime-500 text-white cursor-pointer rounded-xl shadow leading-tight focus:outline-none focus:shadow-outline">
-                            <option>Tags</option>
-                            <option>Opção 2</option>
-                            <option>Opção 3</option>
-                        </select>
-                    </div> */}
-
                     <div className="relative">
                         <select className="block appearance-none w-full bg-lime-500 text-white cursor-pointer rounded-xl  px-3 py-1 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline">
                             <option>Tags</option>
