@@ -5,6 +5,7 @@ import useRequest from "./useRequest";
 
 const useAuth = () => {
   const [authenticated, setAuthenticated] = useState(false);
+  const [loadingAuth, setLoadingAuth] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const { request } = useRequest();
@@ -30,40 +31,46 @@ const useAuth = () => {
     }).then(({ data }) => {
       setUser(data.user);
       setAuthenticated(true);
+      setLoadingAuth(false);
       navigate("/");
     });
   }
 
   async function signIn(body) {
+    setLoadingAuth(true);
     const response = await request("/auth/sign-in", {
       method: "post",
       data: body,
     });
 
-    if(response){
-        await authUser(response.data.token);
+    if (response) {
+      await authUser(response.data.token);
+    } else {
+      setLoadingAuth(false);
     }
   }
 
   async function signUp(body) {
+    setLoadingAuth(true);
     const response = await request("/auth/sign-up", {
       method: "post",
       data: body,
     });
 
-    if(response){
-        await authUser(response.data.token);
+    if (response) {
+      await authUser(response.data.token);
+    } else {
+      setLoadingAuth(false);
     }
-
   }
 
-    function signOut(){
-        setAuthenticated(false)
-        localStorage.removeItem('token')
-        api.defaults.headers.Authorization = undefined
-    }
+  function signOut() {
+    setAuthenticated(false);
+    localStorage.removeItem("token");
+    api.defaults.headers.Authorization = undefined;
+  }
 
-  return { user, setUser, authenticated, signUp, signIn, signOut };
+  return { user, setUser, authenticated, loadingAuth, signUp, signIn, signOut };
 };
 
 export default useAuth;

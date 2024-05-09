@@ -16,7 +16,7 @@ const Register = () => {
     resolver: zodResolver(RSchema),
   });
 
-  const { signUp } = useContext(UserContext);
+  const { signUp, loadingAuth } = useContext(UserContext);
 
   const handleOnSubmit = async (user) => {
     await signUp(user);
@@ -66,12 +66,18 @@ const Register = () => {
           error={errors.confirmpassword}
         />
 
-        <button
-          type="submit"
-          className="bg-green-700 font-bold hover:bg-green-800 rounded-md text-white p-3"
-        >
-          Cadastrar
-        </button>
+        {loadingAuth ? (
+          <div className="flex justify-center align-center p-3.5 bg-green-800 rounded-md">
+            <span className="loading loading-spinner loading-sm bg-white"></span>
+          </div>
+        ) : (
+          <button
+            type="submit"
+            className="bg-green-700 font-bold hover:bg-green-800 rounded-md text-white p-3"
+          >
+            Entrar
+          </button>
+        )}
 
         <span className="text-center text-black">
           Já possui uma conta?{" "}

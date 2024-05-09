@@ -16,7 +16,7 @@ const Login = () => {
     resolver: zodResolver(Loginchema),
   });
 
-  const { signIn } = useContext(UserContext);
+  const { signIn, loadingAuth } = useContext(UserContext);
 
   const handleOnSubmit = async (user) => {
     await signIn(user);
@@ -49,12 +49,20 @@ const Login = () => {
           error={errors.password}
         />
 
-        <button
-          type="submit"
-          className="bg-green-700 font-bold hover:bg-green-800 rounded-md text-white p-3"
-        >
-          Entrar
-        </button>
+        { loadingAuth ? (
+          <div className="flex justify-center align-center p-3.5 bg-green-800 rounded-md">
+            <span className="loading loading-spinner loading-sm bg-white"></span>
+          </div>
+        ) : (
+          <button
+            type="submit"
+            className="bg-green-700 font-bold hover:bg-green-800 rounded-md text-white p-3"
+          >
+            Entrar
+          </button>
+        )}
+
+
 
         <span className="text-center text-black">
           Não possui uma conta?{" "}

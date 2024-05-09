@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import useRequest from "../hooks/useRequest";
 
 
 import Modal from "../components/Modal"
 import { RiStickyNoteAddFill } from "react-icons/ri";
 import { FaTags } from "react-icons/fa";
-import { FaSort } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 import { NoteContext } from "../contexts/NoteContext";
 import NotesList from "../components/NotesList";
