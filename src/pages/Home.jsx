@@ -22,8 +22,7 @@ export default function Home() {
 
     const tags = [
         {id: 1, title: "faculdade"},
-        {id: 2, title: "trabalho"},
-        {id: 3, title: "trabalho trabalho trabalho"}
+        {id: 2, title: "trabalho"}
     ]
 
     useEffect(()=>{
@@ -61,16 +60,6 @@ export default function Home() {
             <Modal />
             <div className="flex justify-between items-center my-4">
                 <div className="flex items-center gap-4">
-                    <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="flex items-center bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold px-2">
-                            <FaSort size={20}/>
-                            Ordenar
-                        </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-lime-900 text-white rounded-box w-52">
-                            <li><a>Faculdade</a></li>
-                            <li><a>Trabalho</a></li>
-                        </ul>
-                    </div>
                     { isLoading && (
                         <span className="loading loading-spinner loading-sm bg-lime-700"></span>
                     ) }

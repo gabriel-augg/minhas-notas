@@ -6,6 +6,7 @@ export function NoteProvider({children}){
     const [notes, setNotes] = useState([])
     const [isCreation, setIsCreation] = useState(false)
     const [currentModalValues, setCurrentModalValues] = useState({
+        id: "",
         pinned: false,
         title: "",
         description: "",

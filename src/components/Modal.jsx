@@ -18,42 +18,37 @@ export default function Modal() {
   const { request } = useRequest();
 
   async function createNote() {
-    const response = await request("/notes/create", {
-      method: "post",
-      data: currentModalValues,
-    });
 
-    const note = response.data.note;
-
-    if (note.pinned) {
-      setNotes((prevNotes) => [note, ...prevNotes]);
+    if (currentModalValues.pinned) {
+      setNotes((prevNotes) => [currentModalValues, ...prevNotes]);
     } else {
       setNotes((prevNotes) => {
         const pinnedNotes = prevNotes.filter((note) => note.pinned);
         const otherNotes = prevNotes.filter((note) => !note.pinned);
-        return [...pinnedNotes, note, ...otherNotes];
+        return [...pinnedNotes, currentModalValues, ...otherNotes];
       });
+
+    await request("/notes/create", {
+      method: "post",
+      data: currentModalValues,
+    });
+
+
     }
   }
 
   async function updateNote() {
-    const response = await request(`/notes/update/${currentModalValues.id}`, {
-      method: "put",
-      data: currentModalValues,
-    });
-
-    const updatedNote = response.data.note;
 
     setNotes((prevNotes) => {
       const updatedNotes = prevNotes.map((note) => {
-        if (note.id === updatedNote.id) {
-          return { ...note, ...updatedNote };
+        if (note.id === currentModalValues.id) {
+          return { ...note, ...currentModalValues };
         }
         return note;
       });
 
       const pinnedNoteIndex = updatedNotes.findIndex(
-        (note) => note.id === updatedNote.id && updatedNote.pinned
+        (note) => note.id === currentModalValues.id && currentModalValues.pinned
       );
 
       if (pinnedNoteIndex !== -1) {
@@ -63,13 +58,15 @@ export default function Modal() {
 
       return updatedNotes;
     });
+
+    await request(`/notes/update/${currentModalValues.id}`, {
+      method: "put",
+      data: currentModalValues,
+    });
   }
 
   async function deleteNote() {
     setIsLoading(true);
-    await request(`/notes/delete/${currentModalValues.id}`, {
-      method: "delete",
-    });
 
     setNotes((prevNotes) => {
       const notes = prevNotes.filter(
@@ -78,25 +75,31 @@ export default function Modal() {
       return [...notes];
     });
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
     document.getElementById("my_modal_2").close();
-  }
+
+    await request(`/notes/delete/${currentModalValues.id}`, {
+      method: "delete",
+    });
+
+    setIsLoading(false);
+
+  } 
 
   async function handleOnSubmit(e) {
     setIsLoading(true);
+
     e.preventDefault();
+
+    document.getElementById("my_modal_2").close();
+
     if (isCreation) {
       await createNote();
     } else {
       await updateNote();
     }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    document.getElementById("my_modal_2").close();
+
+    setIsLoading(false);
+  
   }
 
   function handleInput(e) {
@@ -116,7 +119,6 @@ export default function Modal() {
   const tags = [
     { id: 1, title: "faculdade" },
     { id: 2, title: "trabalho" },
-    { id: 3, title: "trabalho trabalho trabalho" },
   ];
 
   return (
