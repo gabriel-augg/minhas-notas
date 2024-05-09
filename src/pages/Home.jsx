@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 
 
@@ -17,6 +17,7 @@ export default function Home() {
     const { request } = useRequest()
     const { notes, setNotes, setIsCreation, setCurrentModalValues, isLoading } = useContext(NoteContext)
     const { authenticated } = useContext(UserContext)
+    const [loading, setLoading] = useState(true)
 
 
     const tags = [
@@ -34,6 +35,8 @@ export default function Home() {
         }
 
         authenticated && fetchNotes()
+
+        setLoading(false)
 
     },[authenticated])
 
@@ -87,11 +90,17 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-            { notes.length > 0 ? (
+
+            { loading ? (
+                <div className="mt-32 flex justify-center">
+                    <span className="loading loading-bars bg-lime-200 loading-lg"></span>
+                </div>
+            ) : notes.length > 0 ? (
                 <NotesList notes={notes} />
             ) : (
                 <NoNote />
-            )}
+            ) }
+
 
         </section>
     )
