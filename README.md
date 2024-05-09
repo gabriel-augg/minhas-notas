@@ -4,20 +4,19 @@ Apesar da evolução tecnológica, muitas pessoas ainda enfrentam dificuldades n
 
 Embora existam inúmeras soluções digitais disponíveis, desde aplicativos simples até softwares mais complexos, ainda há desafios em encontrar uma ferramenta que seja verdadeiramente eficiente e acessível para todos os usuários.
 
+Para testa o Minhas Notas, clique [aqui](https://minhas-notas-br.vercel.app).
+
 
 ##### **IMPORTANTE!**
 
-> Talvez ao tentar acessar o Wonder, possa demorar um pouco para que a página carregue e mostre as publicações. Isso acontece devido a API do projeto está hospedada no [Render](https://render.com), mas não se preocupe que dentro de um minuto a página carregará normalmente e as publicações serão mostradas.
+> Talvez ao tentar acessar Minhas notas, possa demorar um pouco para que a página carregue e mostre as notas. Isso ocorre devido a API do projeto está hospedada no [Render](https://render.com), mas não se preocupe que dentro de um minuto a página carregará normalmente e as publicações serão mostradas.
 
 ## 🎨 **Layout**
 
 <div style="display: flex; gap: 10px;">
-    <img style="width: 50%;" src="./public/screenshot1.png"  alt="screenshot"/>
-    <img style="width: 50%;" src="./public/screenshot2.png" alt="screenshot"/>
+    <img style="width: 48%;" src="./public/screenshot1.png"  alt="screenshot"/>
+    <img style="width: 48%;" src="./public/screenshot2.png" alt="screenshot"/>
 </div>
-
-
-
 
 ## ⚙️ Sobre o projeto
 
@@ -38,4 +37,38 @@ Cique [aqui](https://github.com/gabriel-augg/minhas-notas-api) para saber mais i
 - DaisyUI 4.10.2
 - React-hook-form 7.51.3
 - Zod 3.22.5
- 
+
+## 🚀 Getting started
+
+Para rodar a aplicação localmente, é necessério fazer clone do projeto e instalar todas as suas dependências.
+
+### Requisitos
+
+- Git
+- Node
+- NPM
+- MySQL
+
+### Clonando o repositório e instalando as dependências
+
+Para clonar o repositório, execute o seguinte comando na pasta de desejo:
+
+```bash
+git clone https://github.com/gabriel-augg/minhas-notas
+```
+
+Apos clonar o repositório, para instalar as dependências, execute os seguintes comandos:
+
+
+```bash
+cd minhas-notas
+npm install
+```
+
+## Iniciando o projeto
+
+Após a instalação de todas as dependência, execute o seguinte comando no terminal:
+
+```bash
+npm run dev
+```
