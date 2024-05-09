@@ -32,11 +32,10 @@ export default function Home() {
             })
 
             setNotes(response.data.notes)
+            setLoading(false)
         }
 
         authenticated && fetchNotes()
-
-        setLoading(false)
 
     },[authenticated])
 
