@@ -11,19 +11,17 @@ import NotesList from "../components/NotesList";
 import TagsList from "../components/TagsList";
 import { UserContext } from "../contexts/UserContext";
 import NoNote from "../components/NoNote";
+import { TagContext } from "../contexts/TagContext";
+import TagModal from "../components/TagModal";
 
 
 export default function Home() {
     const { request } = useRequest()
     const { notes, setNotes, setIsCreation, setCurrentModalValues, isLoading } = useContext(NoteContext)
+    const { tags } = useContext(TagContext)
     const { authenticated } = useContext(UserContext)
     const [loading, setLoading] = useState(true)
 
-
-    const tags = [
-        {id: 1, title: "faculdade"},
-        {id: 2, title: "trabalho"}
-    ]
 
     useEffect(()=>{
         async function fetchNotes(){
@@ -53,12 +51,17 @@ export default function Home() {
         document.getElementById('my_modal_2').showModal()
     }
 
+    function handleAddTag(){
+        document.getElementById('my_modal_3').showModal()
+    }
+
 
 
     return (
         <section className="min-h-screen w-3/4 mx-auto my-7">
             <h1 className="text-3xl font-bold text-black">Notas</h1>
             <Modal />
+            <TagModal />
             <div className="flex justify-between items-center my-4">
                 <div className="flex items-center gap-4">
                     { isLoading && (
@@ -74,7 +77,7 @@ export default function Home() {
                         </div>
                         <ul tabIndex={0} className="dropdown-content z-[1] p-2 shadow bg-lime-900 text-white rounded-box w-52">
                             <li>
-                                <button className="flex items-center w-full bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
+                                <button onClick={handleAddTag} className="flex items-center w-full bg-lime-500 hover:bg-lime-700 text-white gap-1 rounded-xl font-bold p-0.5 px-2">
                                     <IoIosAddCircle size={15} />
                                     Adicionar
                                 </button>

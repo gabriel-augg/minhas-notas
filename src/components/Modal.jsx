@@ -6,6 +6,7 @@ import { RiPushpin2Line } from "react-icons/ri";
 import { RiPushpin2Fill } from "react-icons/ri";
 
 import { IoMdPricetags } from "react-icons/io";
+import { TagContext } from "../contexts/TagContext";
 
 export default function Modal() {
   const {
@@ -15,6 +16,7 @@ export default function Modal() {
     setNotes,
     setIsLoading,
   } = useContext(NoteContext);
+  const { tags } = useContext(TagContext);
   const { request } = useRequest();
 
   async function createNote() {
@@ -116,10 +118,6 @@ export default function Modal() {
     }));
   }
 
-  const tags = [
-    { id: 1, title: "faculdade" },
-    { id: 2, title: "trabalho" },
-  ];
 
   return (
     <dialog id="my_modal_2" className="modal">

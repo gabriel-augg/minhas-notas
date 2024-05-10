@@ -7,6 +7,7 @@ import Header from './components/Header'
 import AppRoutes from './routes'
 import Footer from "./components/Footer"
 import { NoteProvider } from './contexts/NoteContext'
+import { TagProvider } from './contexts/TagContext';
 
 
 function App() {
@@ -15,10 +16,12 @@ function App() {
     <Router>
       <UserProvider>
         <NoteProvider>
-          <Header/>
-            <ToastContainer autoClose={1500} />
-            <AppRoutes/>
-          <Footer/>
+          <TagProvider>
+            <Header/>
+              <ToastContainer autoClose={1500} />
+              <AppRoutes/>
+            <Footer/>
+          </TagProvider>
         </NoteProvider>
       </UserProvider>
     </Router>
