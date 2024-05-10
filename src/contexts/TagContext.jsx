@@ -11,7 +11,7 @@ export function TagProvider({children}){
 
 
     return(
-        <TagContext.Provider value={{ tags, currentTagModalValues }}>
+        <TagContext.Provider value={{ tags, setTags, currentTagModalValues, setCurrentTagModalValues }}>
             {children}
         </TagContext.Provider>
     )

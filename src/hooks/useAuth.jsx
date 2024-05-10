@@ -28,11 +28,6 @@ const useAuth = () => {
     
   }, []);
 
-  useEffect(() => {
-
-    console.log(loading)
-  }, [loading]);
-
   async function authUser(token) {
     localStorage.setItem("token", JSON.stringify(token));
     api.defaults.headers.Authorization = `Bearer ${token}`;

@@ -18,18 +18,26 @@ import TagModal from "../components/TagModal";
 export default function Home() {
     const { request } = useRequest()
     const { notes, setNotes, setIsCreation, setCurrentModalValues, isLoading } = useContext(NoteContext)
-    const { tags } = useContext(TagContext)
+    const { tags, setTags } = useContext(TagContext)
     const { authenticated } = useContext(UserContext)
     const [loading, setLoading] = useState(true)
 
 
     useEffect(()=>{
         async function fetchNotes(){
-            const response = await request("/notes/get-notes", {
-                method: "get"
-            })
 
-            setNotes(response.data.notes)
+            const [notesResponse, tagsResponse] = await Promise.all([
+                request("/notes/get-notes", {
+                    method: "get"
+                }),
+                request("/tags/get-tags", {
+                    method: "get"
+                })
+            ]);
+
+            
+            setNotes(notesResponse.data.notes);
+            setTags(tagsResponse.data.tag);
             setLoading(false)
         }
 
