@@ -2,16 +2,16 @@ import { Route, Routes } from "react-router-dom";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
-import Private from "./Private";
+import PrivateRoute from "./PrivateRoute";
 import EditUser from "../pages/EditUser";
 
 const AppRoutes = () => {
   return (
-    <Routes>
+    <Routes>      
       <Route path="/cadastrar" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/editar" element={ <EditUser /> } />
-      <Route path="/" element={ <Private><Home/></Private> }/>
+      <Route path="/editar" element={ <PrivateRoute><EditUser /></PrivateRoute> } />
+      <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>} />
     </Routes>
   );
 };
