@@ -18,7 +18,7 @@ import TagModal from "../components/TagModal";
 export default function Home() {
     const { request } = useRequest()
     const { notes, setNotes, setIsCreation, setCurrentModalValues, isLoading } = useContext(NoteContext)
-    const { tags, setTags } = useContext(TagContext)
+    const { tags, setTags, setIsCreateTagModalOpen, setCurrentTagModalValues } = useContext(TagContext)
     const { authenticated } = useContext(UserContext)
     const [loading, setLoading] = useState(true)
 
@@ -60,6 +60,11 @@ export default function Home() {
     }
 
     function handleAddTag(){
+        setIsCreateTagModalOpen(true)
+        setCurrentTagModalValues({
+            id: "",
+            title: ""
+        })
         document.getElementById('my_modal_3').showModal()
     }
 

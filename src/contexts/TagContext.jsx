@@ -4,6 +4,7 @@ export const TagContext = createContext()
 
 export function TagProvider({children}){
     const [tags, setTags] = useState([])
+    const [isCreateTagModalOpen, setIsCreateTagModalOpen] = useState(false)
     const [currentTagModalValues, setCurrentTagModalValues] = useState({
         id: "",
         title: ""
@@ -11,7 +12,7 @@ export function TagProvider({children}){
 
 
     return(
-        <TagContext.Provider value={{ tags, setTags, currentTagModalValues, setCurrentTagModalValues }}>
+        <TagContext.Provider value={{ tags, setTags, isCreateTagModalOpen, currentTagModalValues, setCurrentTagModalValues, setIsCreateTagModalOpen }}>
             {children}
         </TagContext.Provider>
     )
