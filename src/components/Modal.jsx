@@ -20,7 +20,6 @@ export default function Modal() {
   const { request } = useRequest();
 
   async function createNote() {
-
     if (currentModalValues.pinned) {
       setNotes((prevNotes) => [currentModalValues, ...prevNotes]);
     } else {
@@ -30,17 +29,14 @@ export default function Modal() {
         return [...pinnedNotes, currentModalValues, ...otherNotes];
       });
 
-    await request("/notes/create", {
-      method: "post",
-      data: currentModalValues,
-    });
-
-
+      await request("/notes/create", {
+        method: "post",
+        data: currentModalValues,
+      });
     }
   }
 
   async function updateNote() {
-
     setNotes((prevNotes) => {
       const updatedNotes = prevNotes.map((note) => {
         if (note.id === currentModalValues.id) {
@@ -84,8 +80,7 @@ export default function Modal() {
     });
 
     setIsLoading(false);
-
-  } 
+  }
 
   async function handleOnSubmit(e) {
     setIsLoading(true);
@@ -101,7 +96,6 @@ export default function Modal() {
     }
 
     setIsLoading(false);
-  
   }
 
   function handleInput(e) {
@@ -117,7 +111,6 @@ export default function Modal() {
       pinned: !prevValues.pinned,
     }));
   }
-
 
   return (
     <dialog id="my_modal_2" className="modal">
@@ -160,9 +153,7 @@ export default function Modal() {
               value={currentModalValues.tag}
               onChange={handleInput}
             >
-              <option defaultChecked>
-                Tags
-              </option>
+              <option defaultChecked>Tags</option>
               {tags.map((tag) => (
                 <option key={tag.id} value={tag.title}>
                   {tag.title}

@@ -69,7 +69,6 @@ export default function Home() {
     }
 
 
-
     return (
         <section className="min-h-screen w-3/4 mx-auto my-7">
             <h1 className="text-3xl font-bold text-black">Notas</h1>
