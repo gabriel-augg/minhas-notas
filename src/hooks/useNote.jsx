@@ -17,12 +17,12 @@ const useNote = () => {
                 const otherNotes = prevNotes.filter((note) => !note.pinned);
                 return [...pinnedNotes, noteModalValues, ...otherNotes];
             });
-
-            await request("/notes/create", {
-                method: "post",
-                data: noteModalValues,
-            });
         }
+
+        await request("/notes/create", {
+            method: "post",
+            data: noteModalValues,
+        });
     }
 
     async function updateNote() {
@@ -90,7 +90,13 @@ const useNote = () => {
         document.getElementById("my_modal_2").close();
     }
 
-    return { createNote, updateNote, deleteNote, clearNoteModalValues, closeNoteModal };
+    return {
+        createNote,
+        updateNote,
+        deleteNote,
+        clearNoteModalValues,
+        closeNoteModal,
+    };
 };
 
 export default useNote;
