@@ -11,7 +11,7 @@ const Header = () => {
 
 
     return(
-        <header className="bg-green-950">
+        <header className="bg-green-950 fixed w-full top-0 left-0">
             <nav className={`p-4 flex ${authenticated ? "justify-between" : "justify-center"} items-center w-5/6 mx-auto`}>
                 <Logo />
                 {authenticated && (
