@@ -40,7 +40,7 @@ export default function User({ username }) {
             <img src={user_icon} width={40} alt="user icon" />
             <div className="flex flex-col">
                 <span className="font-bold text-white text-md">{username}</span>
-                <div className="dropdown dropdown-hover" id="user_dropdown">
+                <div className="dropdown dropdown-end dropdown-hover" id="user_dropdown">
                     <div tabIndex={0} role="button" className="bg-lime-500 flex justify-center text-sm text-white rounded-xl font-bold px-1">Conta</div>
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-lime-900 text-white rounded-box w-40">
                         <li onClick={handleEditUser}>

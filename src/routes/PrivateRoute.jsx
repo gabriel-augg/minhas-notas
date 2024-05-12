@@ -9,13 +9,13 @@ const PrivateRoute = ({ children }) => {
   useEffect(() => {
     if (!loading) {
       if (!authenticated) {
-        navigate("/entrar");
+        navigate("/login");
       }
     }
   }, [loading]);
 
 return authenticated ? children : (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center">
         <div className="loading loading-bars bg-lime-200 loading-lg"></div>
     </div>
 );
