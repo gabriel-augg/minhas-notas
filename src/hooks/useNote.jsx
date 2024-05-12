@@ -5,9 +5,7 @@ import useRequest from "./useRequest";
 
 const useNote = () => {
     const {
-        isCreateNoteModalOpen, 
         noteModalValues,
-        setNoteModalValues,
         setNotes,
         setIsLoading,
       } = useContext(NoteContext);
@@ -33,6 +31,7 @@ const useNote = () => {
       }
     
       async function updateNote() {
+        const id = noteModalValues.id;
         setNotes((prevNotes) => {
           const updatedNotes = prevNotes.map((note) => {
             if (note.id === noteModalValues.id) {
@@ -53,7 +52,7 @@ const useNote = () => {
           return updatedNotes;
         });
     
-        await request(`/notes/update/${noteModalValues.id}`, {
+        await request(`/notes/${id}/update`, {
           method: "put",
           data: noteModalValues,
         });
@@ -61,6 +60,7 @@ const useNote = () => {
     
       async function deleteNote() {
         setIsLoading(true);
+        const id = noteModalValues.id;
     
         setNotes((prevNotes) => {
           const notes = prevNotes.filter(
@@ -71,7 +71,7 @@ const useNote = () => {
     
         document.getElementById("my_modal_2").close();
     
-        await request(`/notes/delete/${noteModalValues.id}`, {
+        await request(`/notes/${id}/delete`, {
           method: "delete",
         });
     
