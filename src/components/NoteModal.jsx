@@ -1,5 +1,5 @@
 import useRequest from "../hooks/useRequest";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NoteContext } from "../contexts/NoteContext";
 import { FaTrash } from "react-icons/fa6";
 import { RiPushpin2Line } from "react-icons/ri";
@@ -8,9 +8,9 @@ import { RiPushpin2Fill } from "react-icons/ri";
 import { IoMdPricetags } from "react-icons/io";
 import { TagContext } from "../contexts/TagContext";
 
-export default function Modal() {
+export default function NoteModal() {
   const {
-    isCreation,
+    isCreation, 
     currentModalValues,
     setCurrentModalValues,
     setNotes,
@@ -18,6 +18,7 @@ export default function Modal() {
   } = useContext(NoteContext);
   const { tags } = useContext(TagContext);
   const { request } = useRequest();
+
 
   async function createNote() {
     if (currentModalValues.pinned) {

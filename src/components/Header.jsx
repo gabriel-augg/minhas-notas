@@ -11,8 +11,8 @@ const Header = () => {
 
 
     return(
-        <header className="bg-green-950 fixed w-full top-0 left-0">
-            <nav className={`p-4 flex ${authenticated ? "justify-between" : "justify-center"} items-center w-5/6 mx-auto`}>
+        <header className="bg-green-950 fixed w-full top-0 left-0 z-20">
+            <nav className={`py-4 flex ${authenticated ? "justify-between" : "justify-center"} items-center w-3/4 mx-auto`}>
                 <Logo />
                 {authenticated && (
                     <User username={user.username} />

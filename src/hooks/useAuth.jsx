@@ -15,7 +15,7 @@ const useAuth = () => {
     const token = localStorage.getItem("token");
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
-      request("/users/check-user", {
+      request("/users/checkuser", {
         method: "get",
       }).then(({ data }) => {
         setUser(data.user);
@@ -31,7 +31,7 @@ const useAuth = () => {
   async function authUser(token) {
     localStorage.setItem("token", JSON.stringify(token));
     api.defaults.headers.Authorization = `Bearer ${token}`;
-    request("/users/check-user", {
+    request("/users/checkuser", {
       method: "get",
     }).then(({ data }) => {
       setUser(data.user);
@@ -43,7 +43,7 @@ const useAuth = () => {
 
   async function signIn(body) {
     setLoadingAuth(true);
-    const response = await request("/auth/sign-in", {
+    const response = await request("/auth/signin", {
       method: "post",
       data: body,
     });
@@ -57,7 +57,7 @@ const useAuth = () => {
 
   async function signUp(body) {
     setLoadingAuth(true);
-    const response = await request("/auth/sign-up", {
+    const response = await request("/auth/signup", {
       method: "post",
       data: body,
     });

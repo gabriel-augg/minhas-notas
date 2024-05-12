@@ -6,73 +6,67 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { Loginchema } from "../utils/schema";
+import AuthButton from "../components/AuthButton";
+import Redirect from "../components/Redirect";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(Loginchema),
-  });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(Loginchema),
+    });
 
-  const { signIn, loadingAuth } = useContext(UserContext);
+    const { signIn, loadingAuth } = useContext(UserContext);
 
-  const handleOnSubmit = async (user) => {
-    await signIn(user);
-  };
+    const handleOnSubmit = async (user) => {
+        await signIn(user);
+    };
 
-  return (
-    <section className="h-screen w-full flex item-center justify-center">
-      <form
-        onSubmit={handleSubmit(handleOnSubmit)}
-        className="flex flex-col gap-3 mx-5 container  max-w-md mt-16"
-      >
-        <h1 className="text-2xl text-center my-5 font-bold text-black">
-          Logando
-        </h1>
+    return (
+        <section className="min-h-screen flex justify-center items-center">
+            <div className="w-5/6 max-w-md">
+                <form
+                    onSubmit={handleSubmit(handleOnSubmit)}
+                    className="flex flex-col gap-3"
+                >
+                    <h1 className="text-2xl text-center my-5 font-bold text-black">
+                        Logando
+                    </h1>
 
-        <Input
-          title="Email"
-          placeholder="Digite o seu email"
-          name="email"
-          register={register}
-          error={errors.email}
-        />
+                    <Input
+                        title="Email"
+                        placeholder="Digite o seu email"
+                        name="email"
+                        register={register}
+                        error={errors.email}
+                    />
 
-        <Input
-          title="Senha"
-          type="password"
-          placeholder="Digite a sua senha"
-          name="password"
-          register={register}
-          error={errors.password}
-        />
+                    <Input
+                        title="Senha"
+                        type="password"
+                        placeholder="Digite a sua senha"
+                        name="password"
+                        register={register}
+                        error={errors.password}
+                    />
 
-        { loadingAuth ? (
-          <div className="flex justify-center align-center p-3.5 bg-green-800 rounded-md">
-            <span className="loading loading-spinner loading-sm bg-white"></span>
-          </div>
-        ) : (
-          <button
-            type="submit"
-            className="bg-green-700 font-bold hover:bg-green-800 rounded-md text-white p-3"
-          >
-            Entrar
-          </button>
-        )}
+                    <AuthButton
+                        title="Entrar"
+                        loading={loadingAuth}
+                        type="submit"
+                    />
 
-
-
-        <span className="text-center text-black">
-          Não possui uma conta?{" "}
-          <Link to={"/cadastrar"} className="text-green-700 hover:underline">
-            Cadastre-se
-          </Link>
-        </span>
-      </form>
-    </section>
-  );
+                    <Redirect
+                        text="Não tem uma conta?"
+                        linkText="Cadastre-se"
+                        link="/cadastrar"
+                    />
+                </form>
+            </div>
+        </section>
+    );
 };
 
 export default Login;
