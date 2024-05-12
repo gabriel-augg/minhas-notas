@@ -20,9 +20,9 @@ export default function User({ username }) {
 
 
     async function handleDeleteAccount(){
-        navigate("/login")
+        navigate("/entrar")
         
-        await request("/users/delete-user", {
+        await request("/users/delete", {
             method: "delete"
         })
 
@@ -31,7 +31,7 @@ export default function User({ username }) {
     }
 
     function handleLogout(){
-        navigate("/login")
+        navigate("/entrar")
         signOut()
     }
 
