@@ -15,7 +15,7 @@ import LoadingContent from "../components/LoadingContent";
 
 export default function Home() {
     const { request } = useRequest();
-    const { notes, setNotes, setIsCreation, setCurrentModalValues, isLoading } =
+    const {notes, setNotes, setIsCreateNoteModalOpen, setNoteModalValues, isLoading } =
         useContext(NoteContext);
     const { tags, setTags, setIsCreateTagModalOpen, setCurrentTagModalValues } =
         useContext(TagContext);
@@ -42,8 +42,8 @@ export default function Home() {
     }, [authenticated]);
 
     function handleAddNote() {
-        setIsCreation(true);
-        setCurrentModalValues({
+        setIsCreateNoteModalOpen(true);
+        setNoteModalValues({
             id: "",
             pinned: false,
             title: "",
@@ -98,7 +98,7 @@ export default function Home() {
                                         Adicionar
                                     </button>
                                 </li>
-                                {/* <TagsList tags={tags} /> */}
+                                <TagsList tags={tags} />
                             </ul>
                         </div>
                         <button

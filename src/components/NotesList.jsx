@@ -2,7 +2,7 @@ import NoNote from "./NoNote";
 import Note from "./Note";
 
 export default function NotesList({ notes }) {
-    return false ? (
+    return notes.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {notes.map((note) => {
                 return (

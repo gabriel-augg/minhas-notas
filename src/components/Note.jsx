@@ -4,13 +4,13 @@ import { RiPushpin2Fill } from "react-icons/ri";
 
 export default function Note({id, title, description, tag, pinned}){
 
-    const { setCurrentModalValues, setIsCreation } = useContext(NoteContext)
+    const { setNoteModalValues, setIsCreateNoteModalOpen } = useContext(NoteContext)
 
     function handleShowModal(){
 
-        setIsCreation(false)
+        setIsCreateNoteModalOpen(false)
 
-        setCurrentModalValues({
+        setNoteModalValues({
             id,
             title,
             description,

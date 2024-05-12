@@ -4,26 +4,27 @@ export const NoteContext = createContext();
 
 export function NoteProvider({ children }) {
     const [notes, setNotes] = useState([]);
-    const [isCreation, setIsCreation] = useState(false);
-    const [currentModalValues, setCurrentModalValues] = useState({
+    const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] = useState(false);
+    const [noteModalValues, setNoteModalValues] = useState({
         id: "",
         pinned: false,
         title: "",
         description: "",
         tag: "",
     });
+
     const [isLoading, setIsLoading] = useState(false);
 
     return (
         <NoteContext.Provider
             value={{
                 notes,
-                currentModalValues,
-                isCreation,
+                noteModalValues,
+                isCreateNoteModalOpen,
                 isLoading,
                 setNotes,
-                setCurrentModalValues,
-                setIsCreation,
+                setNoteModalValues,
+                setIsCreateNoteModalOpen,
                 setIsLoading,
             }}
         >
