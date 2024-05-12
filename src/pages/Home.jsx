@@ -12,14 +12,16 @@ import { UserContext } from "../contexts/UserContext";
 import { TagContext } from "../contexts/TagContext";
 import TagModal from "../components/TagModal";
 import LoadingContent from "../components/LoadingContent";
+import useNote from "../hooks/useNote";
 
 export default function Home() {
     const { request } = useRequest();
-    const {notes, setNotes, setIsCreateNoteModalOpen, setNoteModalValues, isLoading } =
+    const {notes, setNotes, setIsCreateNoteModalOpen, isLoading } =
         useContext(NoteContext);
     const { tags, setTags, setIsCreateTagModalOpen, setTagModalValues } =
         useContext(TagContext);
     const { authenticated } = useContext(UserContext);
+    const { clearNoteModalValues } = useNote();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -43,15 +45,7 @@ export default function Home() {
 
     function handleAddNote() {
         setIsCreateNoteModalOpen(true);
-        setNoteModalValues({
-            id: "",
-            pinned: false,
-            title: "",
-            description: "",
-            tag: "",
-            createdAt: "",
-            updatedAt: "",
-        });
+        clearNoteModalValues();
         document.getElementById("my_modal_2").showModal();
     }
 
