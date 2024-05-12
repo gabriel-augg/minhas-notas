@@ -1,61 +1,15 @@
 import { useContext } from "react";
 import { TagContext } from "../contexts/TagContext";
-import useRequest from "../hooks/useRequest";
+import useTag from "../hooks/useTag";
 
 export default function TagModal() {
     const {
-        tags,
-        setTags,
-        currentTagModalValues,
-        setCurrentTagModalValues,
+        tagModalValues,
+        setTagModalValues,
         isCreateTagModalOpen,
     } = useContext(TagContext);
-    const { request } = useRequest();
 
-    const handleInput = (e) => {
-        setCurrentTagModalValues({
-            ...currentTagModalValues,
-            title: e.target.value,
-        });
-    };
-
-    const createTag = async () => {
-        const newTag = {
-            title: currentTagModalValues.title,
-        };
-
-        setTags((prevTags) => [newTag, ...prevTags]);
-
-        document.getElementById("my_modal_3").close();
-
-        await request("/tags/create-tag", {
-            method: "post",
-            data: newTag,
-        });
-    };
-
-    const updateTag = async () => {
-        const updatedTag = {
-            id: currentTagModalValues.id,
-            title: currentTagModalValues.title,
-        };
-
-        const updatedTags = tags.map((tag) => {
-            if (tag.id === updatedTag.id) {
-                return updatedTag;
-            }
-            return tag;
-        });
-
-        setTags(updatedTags);
-
-        document.getElementById("my_modal_3").close();
-
-        await request(`/tags/update-tag/${currentTagModalValues.id}`, {
-            method: "patch",
-            data: updatedTag,
-        });
-    };
+    const { createTag, updateTag } = useTag();
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
@@ -66,7 +20,14 @@ export default function TagModal() {
             await updateTag();
         }
 
-        setCurrentTagModalValues({ id: "", title: "" });
+        setTagModalValues({ id: "", name: "" });
+    };
+
+    const handleInput = (e) => {
+        setTagModalValues({
+            ...tagModalValues,
+            name: e.target.value,
+        });
     };
 
     return (
@@ -76,9 +37,9 @@ export default function TagModal() {
                     <input
                         type="text"
                         className="bg-transparent placeholder-lime-700 text-lg text-black font-bold w-full outline-none p-text-area"
-                        name="title"
+                        name="name"
                         placeholder="Nome"
-                        value={currentTagModalValues.title}
+                        value={tagModalValues.name}
                         onChange={handleInput}
                     />
                     <button

@@ -17,7 +17,7 @@ export default function Home() {
     const { request } = useRequest();
     const {notes, setNotes, setIsCreateNoteModalOpen, setNoteModalValues, isLoading } =
         useContext(NoteContext);
-    const { tags, setTags, setIsCreateTagModalOpen, setCurrentTagModalValues } =
+    const { tags, setTags, setIsCreateTagModalOpen, setTagModalValues } =
         useContext(TagContext);
     const { authenticated } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
@@ -57,9 +57,9 @@ export default function Home() {
 
     function handleAddTag() {
         setIsCreateTagModalOpen(true);
-        setCurrentTagModalValues({
+        setTagModalValues({
             id: "",
-            title: "",
+            name: "",
         });
         document.getElementById("my_modal_3").showModal();
     }

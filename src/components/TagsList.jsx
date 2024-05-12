@@ -6,7 +6,7 @@ export default function TagsList({tags}){
             <Tag
                 key={tag.id}
                 id={tag.id}
-                title={tag.title} 
+                name={tag.name} 
             />
         )
 
