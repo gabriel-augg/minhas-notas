@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
   useEffect(() => {
     if (!loading) {
       if (!authenticated) {
-        navigate("/login");
+        navigate("/entrar");
       }
     }
   }, [loading]);
