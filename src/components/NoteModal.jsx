@@ -9,11 +9,8 @@ import { TagContext } from "../contexts/TagContext";
 import useNote from "../hooks/useNote";
 
 export default function NoteModal() {
-    const {
-        isCreateNoteModalOpen,
-        noteModalValues,
-        setNoteModalValues,
-    } = useContext(NoteContext);
+    const { isCreateNoteModalOpen, noteModalValues, setNoteModalValues } =
+        useContext(NoteContext);
 
     const { tags } = useContext(TagContext);
 
@@ -90,10 +87,17 @@ export default function NoteModal() {
                             value={noteModalValues.tag}
                             onChange={handleInput}
                         >
-                            <option defaultChecked>Tags</option>
+                            <option defaultChecked value="">
+                                Tags
+                            </option>
+
+                            {noteModalValues.tag && (
+                                <option value="">Remover</option>
+                            )}
+
                             {tags.map((tag) => (
-                                <option key={tag.id} value={tag.title}>
-                                    {tag.title}
+                                <option key={tag.id} value={tag.name}>
+                                    {tag.name}
                                 </option>
                             ))}
                         </select>
