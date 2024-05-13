@@ -8,6 +8,10 @@ const useNote = () => {
         useContext(NoteContext);
     const { request } = useRequest();
 
+    function closeNoteModal() {
+        document.getElementById("my_modal_2").close();
+    }
+
     async function createNote() {
         if (noteModalValues.pinned) {
             setNotes((prevNotes) => [noteModalValues, ...prevNotes]);
@@ -65,7 +69,7 @@ const useNote = () => {
             return [...notes];
         });
 
-        document.getElementById("my_modal_2").close();
+        closeNoteModal();
 
         await request(`/notes/${id}/delete`, {
             method: "delete",
@@ -84,10 +88,6 @@ const useNote = () => {
             createdAt: "",
             updatedAt: "",
         });
-    }
-
-    function closeNoteModal() {
-        document.getElementById("my_modal_2").close();
     }
 
     return {
