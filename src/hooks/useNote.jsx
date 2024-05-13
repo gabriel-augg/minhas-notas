@@ -114,7 +114,6 @@ const useNote = () => {
         updateNote,
         deleteNote,
         clearNoteModalValues,
-        closeNoteModal,
         showNoteModal,
     };
 };
