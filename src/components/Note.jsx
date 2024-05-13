@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import { NoteContext } from "../contexts/NoteContext";
 import { RiPushpin2Fill } from "react-icons/ri";
+import useNote from "../hooks/useNote";
 
 export default function Note({ id, title, description, tag, pinned }) {
     const { setNoteModalValues, setIsCreateNoteModalOpen } =
         useContext(NoteContext);
+
+    const { showNoteModal } = useNote();
 
     function handleShowModal() {
         setIsCreateNoteModalOpen(false);
@@ -17,7 +20,7 @@ export default function Note({ id, title, description, tag, pinned }) {
             pinned,
         });
 
-        document.getElementById("my_modal_2").showModal();
+        showNoteModal();
     }
 
     return (

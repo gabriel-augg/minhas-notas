@@ -17,13 +17,18 @@ import useTag from "../hooks/useTag";
 
 export default function Home() {
     const { request } = useRequest();
-    const {notes, setNotes, setIsCreateNoteModalOpen, loadingNote } =
+    const { notes, setNotes, setIsCreateNoteModalOpen, loadingNote } =
         useContext(NoteContext);
-    const { tags, setTags, setIsCreateTagModalOpen, setTagModalValues, loadingTag } =
-        useContext(TagContext);
+    const {
+        tags,
+        setTags,
+        setIsCreateTagModalOpen,
+        setTagModalValues,
+        loadingTag,
+    } = useContext(TagContext);
     const { authenticated } = useContext(UserContext);
-    const { clearNoteModalValues } = useNote();
-    const { clearTagModalValues } = useTag();
+    const { showNoteModal, clearNoteModalValues } = useNote();
+    const { showTagModal, clearTagModalValues } = useTag();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -48,13 +53,13 @@ export default function Home() {
     function handleAddNote() {
         setIsCreateNoteModalOpen(true);
         clearNoteModalValues();
-        document.getElementById("my_modal_2").showModal();
+        showNoteModal();
     }
 
     function handleAddTag() {
         setIsCreateTagModalOpen(true);
         clearTagModalValues();
-        document.getElementById("my_modal_3").showModal();
+        showTagModal();
     }
 
     return (

@@ -8,6 +8,10 @@ const useNote = () => {
         useContext(NoteContext);
     const { request } = useRequest();
 
+    const showNoteModal = () => {
+        document.getElementById("my_modal_2").showModal();
+    };
+
     const closeNoteModal = () => {
         document.getElementById("my_modal_2").close();
     };
@@ -111,6 +115,7 @@ const useNote = () => {
         deleteNote,
         clearNoteModalValues,
         closeNoteModal,
+        showNoteModal,
     };
 };
 

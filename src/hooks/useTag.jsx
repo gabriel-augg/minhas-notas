@@ -15,13 +15,17 @@ const useTag = () => {
     } = useContext(TagContext);
     const { request } = useRequest();
 
+    const showTagModal = () => {
+        document.getElementById("my_modal_3").showModal();
+    };
+
     const closeTagModal = () => {
         document.getElementById("my_modal_3").close();
-    }
+    };
 
     const clearTagModalValues = () => {
         setTagModalValues({ id: "", name: "" });
-    }
+    };
 
     const createTag = async () => {
         setLoadingTag(true);
@@ -32,7 +36,7 @@ const useTag = () => {
 
         closeTagModal();
 
-        if(newTag.name === "") return;
+        if (newTag.name === "") return;
 
         setTags((prevTags) => [newTag, ...prevTags]);
 
@@ -55,7 +59,7 @@ const useTag = () => {
 
         closeTagModal();
 
-        if(updatedTag.name === "") return;
+        if (updatedTag.name === "") return;
 
         const updatedTags = tags.map((tag) => {
             if (tag.id === tagId) {
@@ -78,18 +82,24 @@ const useTag = () => {
     const deleteTag = async (tagId) => {
         setLoadingTag(true);
         const updatedTags = tags.filter((tag) => tag.id !== tagId);
-    
+
         setTags(updatedTags);
-    
+
         closeTagModal();
-    
+
         await request(`/tags/${tagId}/delete`, {
-          method: "delete",
+            method: "delete",
         });
         setLoadingTag(false);
-      }
+    };
 
-    return { createTag, updateTag, deleteTag, clearTagModalValues };
-}
+    return {
+        createTag,
+        updateTag,
+        deleteTag,
+        clearTagModalValues,
+        showTagModal,
+    };
+};
 
 export default useTag;

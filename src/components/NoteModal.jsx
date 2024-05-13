@@ -13,7 +13,6 @@ export default function NoteModal() {
         isCreateNoteModalOpen,
         noteModalValues,
         setNoteModalValues,
-        setLoadingNote,
     } = useContext(NoteContext);
 
     const { tags } = useContext(TagContext);

@@ -7,6 +7,8 @@ export default function Tag({ id, name }) {
     const { setTagModalValues, setIsCreateTagModalOpen } =
         useContext(TagContext);
 
+    const { deleteTag, showTagModal } = useTag();
+
     function handleShowModal() {
         setIsCreateTagModalOpen(false);
 
@@ -15,10 +17,8 @@ export default function Tag({ id, name }) {
             name,
         });
 
-        document.getElementById("my_modal_3").showModal();
+        showTagModal();
     }
-
-    const { deleteTag } = useTag();
 
     return (
         <li>
