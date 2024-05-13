@@ -21,9 +21,11 @@ const useTag = () => {
             name: tagModalValues.name,
         };
 
-        setTags((prevTags) => [newTag, ...prevTags]);
-
         closeTagModal();
+
+        if(newTag.name === "") return;
+
+        setTags((prevTags) => [newTag, ...prevTags]);
 
         await request("/tags/create", {
             method: "post",
@@ -39,6 +41,10 @@ const useTag = () => {
             name: tagModalValues.name,
         };
 
+        closeTagModal();
+
+        if(updatedTag.name === "") return;
+
         const updatedTags = tags.map((tag) => {
             if (tag.id === tagId) {
                 return updatedTag;
@@ -47,8 +53,6 @@ const useTag = () => {
         });
 
         setTags(updatedTags);
-
-        closeTagModal();
 
         await request(`/tags/${tagId}/update`, {
             method: "patch",
