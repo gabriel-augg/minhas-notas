@@ -89,7 +89,7 @@ const useTag = () => {
         setLoadingTag(false);
       }
 
-    return { createTag, updateTag, deleteTag };
+    return { createTag, updateTag, deleteTag, clearTagModalValues };
 }
 
 export default useTag;

@@ -12,6 +12,18 @@ const useNote = () => {
         document.getElementById("my_modal_2").close();
     };
 
+    const clearNoteModalValues = () => {
+        setNoteModalValues({
+            id: "",
+            pinned: false,
+            title: "",
+            description: "",
+            tag: "",
+            createdAt: "",
+            updatedAt: "",
+        });
+    };
+
     const createNote = async () => {
         setLoadingNote(true);
         const newNote = {
@@ -91,18 +103,6 @@ const useNote = () => {
         });
 
         setLoadingNote(false);
-    };
-
-    const clearNoteModalValues = () => {
-        setNoteModalValues({
-            id: "",
-            pinned: false,
-            title: "",
-            description: "",
-            tag: "",
-            createdAt: "",
-            updatedAt: "",
-        });
     };
 
     return {

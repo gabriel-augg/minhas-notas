@@ -13,6 +13,7 @@ import { TagContext } from "../contexts/TagContext";
 import TagModal from "../components/TagModal";
 import LoadingContent from "../components/LoadingContent";
 import useNote from "../hooks/useNote";
+import useTag from "../hooks/useTag";
 
 export default function Home() {
     const { request } = useRequest();
@@ -22,6 +23,7 @@ export default function Home() {
         useContext(TagContext);
     const { authenticated } = useContext(UserContext);
     const { clearNoteModalValues } = useNote();
+    const { clearTagModalValues } = useTag();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -51,10 +53,7 @@ export default function Home() {
 
     function handleAddTag() {
         setIsCreateTagModalOpen(true);
-        setTagModalValues({
-            id: "",
-            name: "",
-        });
+        clearTagModalValues();
         document.getElementById("my_modal_3").showModal();
     }
 
