@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NoteContext } from "../contexts/NoteContext";
-import { TagContext } from "../contexts/TagContext";
 import useRequest from "./useRequest";
+import generateID from "../utils/generateID";
 
 const useNote = () => {
     const { noteModalValues, setNotes, setIsLoading, setNoteModalValues } =
@@ -13,35 +13,44 @@ const useNote = () => {
     }
 
     async function createNote() {
-        if (noteModalValues.pinned) {
-            setNotes((prevNotes) => [noteModalValues, ...prevNotes]);
+
+        const newNote = {
+            ...noteModalValues,
+            id: generateID(),
+        };
+
+        if (newNote.pinned) {
+            setNotes((prevNotes) => [newNote, ...prevNotes]);
         } else {
             setNotes((prevNotes) => {
                 const pinnedNotes = prevNotes.filter((note) => note.pinned);
                 const otherNotes = prevNotes.filter((note) => !note.pinned);
-                return [...pinnedNotes, noteModalValues, ...otherNotes];
+                return [...pinnedNotes, newNote, ...otherNotes];
             });
         }
 
         await request("/notes/create", {
             method: "post",
-            data: noteModalValues,
+            data: newNote,
         });
     }
 
     async function updateNote() {
         const id = noteModalValues.id;
+
+        const currentNote = noteModalValues;
+
         setNotes((prevNotes) => {
             const updatedNotes = prevNotes.map((note) => {
-                if (note.id === noteModalValues.id) {
-                    return { ...note, ...noteModalValues };
+                if (note.id === currentNote.id) {
+                    return { ...note, ...currentNote };
                 }
                 return note;
             });
 
             const pinnedNoteIndex = updatedNotes.findIndex(
                 (note) =>
-                    note.id === noteModalValues.id && noteModalValues.pinned
+                    note.id === currentNote.id && currentNote.pinned
             );
 
             if (pinnedNoteIndex !== -1) {
@@ -54,7 +63,7 @@ const useNote = () => {
 
         await request(`/notes/${id}/update`, {
             method: "put",
-            data: noteModalValues,
+            data: currentNote,
         });
     }
 
