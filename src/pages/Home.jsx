@@ -18,7 +18,7 @@ export default function Home() {
     const { request } = useRequest();
     const {notes, setNotes, setIsCreateNoteModalOpen, loadingNote } =
         useContext(NoteContext);
-    const { tags, setTags, setIsCreateTagModalOpen, setTagModalValues } =
+    const { tags, setTags, setIsCreateTagModalOpen, setTagModalValues, loadingTag } =
         useContext(TagContext);
     const { authenticated } = useContext(UserContext);
     const { clearNoteModalValues } = useNote();
@@ -67,7 +67,7 @@ export default function Home() {
 
                 <div className="flex justify-end items-center my-4">
                     <div className="flex items-center gap-3">
-                        {loadingNote && (
+                        {(loadingNote || loadingTag) && (
                             <span className="loading loading-spinner loading-sm bg-lime-700"></span>
                         )}
                         <div className="dropdown dropdown-hover ">

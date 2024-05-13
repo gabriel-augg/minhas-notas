@@ -2,13 +2,16 @@ import { useContext } from "react";
 import { TagContext } from "../contexts/TagContext";
 import useRequest from "./useRequest";
 import generateID from "../utils/generateID";
+import { set } from "react-hook-form";
 
 const useTag = () => {
     const {
         tags,
+        loadingTag,
         setTags,
         tagModalValues,
         setTagModalValues,
+        setLoadingTag,
     } = useContext(TagContext);
     const { request } = useRequest();
 
@@ -21,6 +24,7 @@ const useTag = () => {
     }
 
     const createTag = async () => {
+        setLoadingTag(true);
         const newTag = {
             id: generateID(),
             name: tagModalValues.name,
@@ -38,10 +42,11 @@ const useTag = () => {
             method: "post",
             data: newTag,
         });
+        setLoadingTag(false);
     };
 
     const updateTag = async () => {
-
+        setLoadingTag(true);
         const tagId = tagModalValues.id;
 
         const updatedTag = {
@@ -67,10 +72,11 @@ const useTag = () => {
             method: "patch",
             data: updatedTag,
         });
+        setLoadingTag(false);
     };
 
     const deleteTag = async (tagId) => {
-      
+        setLoadingTag(true);
         const updatedTags = tags.filter((tag) => tag.id !== tagId);
     
         setTags(updatedTags);
@@ -80,6 +86,7 @@ const useTag = () => {
         await request(`/tags/${tagId}/delete`, {
           method: "delete",
         });
+        setLoadingTag(false);
       }
 
     return { createTag, updateTag, deleteTag };

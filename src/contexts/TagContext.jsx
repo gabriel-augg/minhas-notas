@@ -10,6 +10,8 @@ export function TagProvider({ children }) {
         name: "",
     });
 
+    const [loadingTag, setLoadingTag] = useState(false);
+
     return (
         <TagContext.Provider
             value={{
@@ -17,8 +19,10 @@ export function TagProvider({ children }) {
                 setTags,
                 isCreateTagModalOpen,
                 tagModalValues,
+                loadingTag,
                 setTagModalValues,
                 setIsCreateTagModalOpen,
+                setLoadingTag,
             }}
         >
             {children}
