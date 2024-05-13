@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://minhas-notas-api.onrender.com"
+    baseURL: "http://localhost:3000"
 })

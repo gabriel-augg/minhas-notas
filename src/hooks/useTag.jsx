@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { TagContext } from "../contexts/TagContext";
 import useRequest from "./useRequest";
+import generateID from "../utils/generateID";
 
 const useTag = () => {
     const {
@@ -10,14 +11,19 @@ const useTag = () => {
     } = useContext(TagContext);
     const { request } = useRequest();
 
+    const closeTagModal = () => {
+        document.getElementById("my_modal_3").close();
+    }
+
     const createTag = async () => {
         const newTag = {
+            id: generateID(),
             name: tagModalValues.name,
         };
 
         setTags((prevTags) => [newTag, ...prevTags]);
 
-        document.getElementById("my_modal_3").close();
+        closeTagModal();
 
         await request("/tags/create", {
             method: "post",
@@ -27,15 +33,14 @@ const useTag = () => {
 
     const updateTag = async () => {
 
-        const id = tagModalValues.id;
+        const tagId = tagModalValues.id;
 
         const updatedTag = {
-            id: tagModalValues.id,
             name: tagModalValues.name,
         };
 
         const updatedTags = tags.map((tag) => {
-            if (tag.id === updatedTag.id) {
+            if (tag.id === tagId) {
                 return updatedTag;
             }
             return tag;
@@ -43,23 +48,23 @@ const useTag = () => {
 
         setTags(updatedTags);
 
-        document.getElementById("my_modal_3").close();
+        closeTagModal();
 
-        await request(`/tags/${id}/update`, {
+        await request(`/tags/${tagId}/update`, {
             method: "patch",
             data: updatedTag,
         });
     };
 
-    const deleteTag = async (id) => {
+    const deleteTag = async (tagId) => {
       
-        const updatedTags = tags.filter((tag) => tag.id !== id);
+        const updatedTags = tags.filter((tag) => tag.id !== tagId);
     
         setTags(updatedTags);
     
-        document.getElementById("my_modal_3").close();
+        closeTagModal();
     
-        await request(`/tags/${id}/delete`, {
+        await request(`/tags/${tagId}/delete`, {
           method: "delete",
         });
       }
