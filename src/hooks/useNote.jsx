@@ -8,12 +8,11 @@ const useNote = () => {
         useContext(NoteContext);
     const { request } = useRequest();
 
-    function closeNoteModal() {
+    const closeNoteModal = () => {
         document.getElementById("my_modal_2").close();
-    }
+    };
 
-    async function createNote() {
-
+    const createNote = async () => {
         const newNote = {
             ...noteModalValues,
             id: generateID(),
@@ -29,28 +28,29 @@ const useNote = () => {
             });
         }
 
+        closeNoteModal();
+
         await request("/notes/create", {
             method: "post",
             data: newNote,
         });
-    }
+    };
 
-    async function updateNote() {
-        const id = noteModalValues.id;
+    const updateNote = async () => {
+        const noteId = noteModalValues.id;
 
         const currentNote = noteModalValues;
 
         setNotes((prevNotes) => {
             const updatedNotes = prevNotes.map((note) => {
-                if (note.id === currentNote.id) {
+                if (note.id === noteId) {
                     return { ...note, ...currentNote };
                 }
                 return note;
             });
 
             const pinnedNoteIndex = updatedNotes.findIndex(
-                (note) =>
-                    note.id === currentNote.id && currentNote.pinned
+                (note) => note.id === noteId && currentNote.pinned
             );
 
             if (pinnedNoteIndex !== -1) {
@@ -61,33 +61,33 @@ const useNote = () => {
             return updatedNotes;
         });
 
-        await request(`/notes/${id}/update`, {
+        closeNoteModal();
+
+        await request(`/notes/${noteId}/update`, {
             method: "put",
             data: currentNote,
         });
-    }
+    };
 
-    async function deleteNote() {
+    const deleteNote = async () => {
         setIsLoading(true);
-        const id = noteModalValues.id;
+        const nodeId = noteModalValues.id;
 
         setNotes((prevNotes) => {
-            const notes = prevNotes.filter(
-                (note) => note.id !== noteModalValues.id
-            );
+            const notes = prevNotes.filter((note) => note.id !== nodeId);
             return [...notes];
         });
 
         closeNoteModal();
 
-        await request(`/notes/${id}/delete`, {
+        await request(`/notes/${nodeId}/delete`, {
             method: "delete",
         });
 
         setIsLoading(false);
-    }
+    };
 
-    function clearNoteModalValues() {
+    const clearNoteModalValues = () => {
         setNoteModalValues({
             id: "",
             pinned: false,
@@ -97,7 +97,7 @@ const useNote = () => {
             createdAt: "",
             updatedAt: "",
         });
-    }
+    };
 
     return {
         createNote,

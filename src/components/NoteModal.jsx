@@ -18,14 +18,12 @@ export default function NoteModal() {
 
     const { tags } = useContext(TagContext);
 
-    const { createNote, updateNote, deleteNote, closeNoteModal } = useNote();
+    const { createNote, updateNote, deleteNote } = useNote();
 
     async function handleOnSubmit(e) {
         setIsLoading(true);
 
         e.preventDefault();
-
-        closeNoteModal();
 
         if (isCreateNoteModalOpen) {
             await createNote();
