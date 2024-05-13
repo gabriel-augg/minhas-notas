@@ -5,14 +5,8 @@ import generateID from "../utils/generateID";
 import { set } from "react-hook-form";
 
 const useTag = () => {
-    const {
-        tags,
-        loadingTag,
-        setTags,
-        tagModalValues,
-        setTagModalValues,
-        setLoadingTag,
-    } = useContext(TagContext);
+    const { tags, setTags, tagModalValues, setTagModalValues, setLoadingTag } =
+        useContext(TagContext);
     const { request } = useRequest();
 
     const showTagModal = () => {
@@ -53,9 +47,7 @@ const useTag = () => {
         setLoadingTag(true);
         const tagId = tagModalValues.id;
 
-        const updatedTag = {
-            name: tagModalValues.name,
-        };
+        const updatedTag = tagModalValues;
 
         closeTagModal();
 
@@ -63,7 +55,7 @@ const useTag = () => {
 
         const updatedTags = tags.map((tag) => {
             if (tag.id === tagId) {
-                return updatedTag;
+                return {...tag, ...updatedTag};
             }
             return tag;
         });

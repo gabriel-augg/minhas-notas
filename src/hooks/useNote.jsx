@@ -59,18 +59,18 @@ const useNote = () => {
         setLoadingNote(true);
         const noteId = noteModalValues.id;
 
-        const currentNote = noteModalValues;
+        const updatedNote = noteModalValues;
 
         setNotes((prevNotes) => {
             const updatedNotes = prevNotes.map((note) => {
                 if (note.id === noteId) {
-                    return { ...note, ...currentNote };
+                    return { ...note, ...updatedNote };
                 }
                 return note;
             });
 
             const pinnedNoteIndex = updatedNotes.findIndex(
-                (note) => note.id === noteId && currentNote.pinned
+                (note) => note.id === noteId && updatedNote.pinned
             );
 
             if (pinnedNoteIndex !== -1) {
@@ -85,7 +85,7 @@ const useNote = () => {
 
         await request(`/notes/${noteId}/update`, {
             method: "put",
-            data: currentNote,
+            data: updateNote,
         });
 
         setLoadingNote(false);
