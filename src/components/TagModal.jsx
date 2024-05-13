@@ -3,11 +3,8 @@ import { TagContext } from "../contexts/TagContext";
 import useTag from "../hooks/useTag";
 
 export default function TagModal() {
-    const {
-        tagModalValues,
-        setTagModalValues,
-        isCreateTagModalOpen,
-    } = useContext(TagContext);
+    const { tagModalValues, setTagModalValues, isCreateTagModalOpen } =
+        useContext(TagContext);
 
     const { createTag, updateTag } = useTag();
 
@@ -19,8 +16,6 @@ export default function TagModal() {
         } else {
             await updateTag();
         }
-
-        setTagModalValues({ id: "", name: "" });
     };
 
     const handleInput = (e) => {

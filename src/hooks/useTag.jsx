@@ -8,11 +8,16 @@ const useTag = () => {
         tags,
         setTags,
         tagModalValues,
+        setTagModalValues,
     } = useContext(TagContext);
     const { request } = useRequest();
 
     const closeTagModal = () => {
         document.getElementById("my_modal_3").close();
+    }
+
+    const clearTagModalValues = () => {
+        setTagModalValues({ id: "", name: "" });
     }
 
     const createTag = async () => {
@@ -26,6 +31,8 @@ const useTag = () => {
         if(newTag.name === "") return;
 
         setTags((prevTags) => [newTag, ...prevTags]);
+
+        clearTagModalValues();
 
         await request("/tags/create", {
             method: "post",
@@ -53,6 +60,8 @@ const useTag = () => {
         });
 
         setTags(updatedTags);
+
+        clearTagModalValues();
 
         await request(`/tags/${tagId}/update`, {
             method: "patch",
