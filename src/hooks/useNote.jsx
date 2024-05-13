@@ -71,16 +71,16 @@ const useNote = () => {
 
     const deleteNote = async () => {
         setIsLoading(true);
-        const nodeId = noteModalValues.id;
+        const noteId = noteModalValues.id;
 
         setNotes((prevNotes) => {
-            const notes = prevNotes.filter((note) => note.id !== nodeId);
+            const notes = prevNotes.filter((note) => note.id !== noteId);
             return [...notes];
         });
 
         closeNoteModal();
 
-        await request(`/notes/${nodeId}/delete`, {
+        await request(`/notes/${noteId}/delete`, {
             method: "delete",
         });
 
