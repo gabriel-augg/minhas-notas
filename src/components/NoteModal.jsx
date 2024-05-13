@@ -13,7 +13,7 @@ export default function NoteModal() {
         isCreateNoteModalOpen,
         noteModalValues,
         setNoteModalValues,
-        setIsLoading,
+        setLoadingNote,
     } = useContext(NoteContext);
 
     const { tags } = useContext(TagContext);
@@ -21,8 +21,6 @@ export default function NoteModal() {
     const { createNote, updateNote, deleteNote } = useNote();
 
     async function handleOnSubmit(e) {
-        setIsLoading(true);
-
         e.preventDefault();
 
         if (isCreateNoteModalOpen) {
@@ -30,8 +28,6 @@ export default function NoteModal() {
         } else {
             await updateNote();
         }
-
-        setIsLoading(false);
     }
 
     function handleInput(e) {

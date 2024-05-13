@@ -4,7 +4,7 @@ import useRequest from "./useRequest";
 import generateID from "../utils/generateID";
 
 const useNote = () => {
-    const { noteModalValues, setNotes, setIsLoading, setNoteModalValues } =
+    const { noteModalValues, setNotes, setLoadingNote, setNoteModalValues } =
         useContext(NoteContext);
     const { request } = useRequest();
 
@@ -13,6 +13,7 @@ const useNote = () => {
     };
 
     const createNote = async () => {
+        setLoadingNote(true);
         const newNote = {
             ...noteModalValues,
             id: generateID(),
@@ -34,9 +35,12 @@ const useNote = () => {
             method: "post",
             data: newNote,
         });
+
+        setLoadingNote(false);
     };
 
     const updateNote = async () => {
+        setLoadingNote(true);
         const noteId = noteModalValues.id;
 
         const currentNote = noteModalValues;
@@ -67,10 +71,12 @@ const useNote = () => {
             method: "put",
             data: currentNote,
         });
+
+        setLoadingNote(false);
     };
 
     const deleteNote = async () => {
-        setIsLoading(true);
+        setLoadingNote(true);
         const noteId = noteModalValues.id;
 
         setNotes((prevNotes) => {
@@ -84,7 +90,7 @@ const useNote = () => {
             method: "delete",
         });
 
-        setIsLoading(false);
+        setLoadingNote(false);
     };
 
     const clearNoteModalValues = () => {

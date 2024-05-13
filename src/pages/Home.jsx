@@ -16,7 +16,7 @@ import useNote from "../hooks/useNote";
 
 export default function Home() {
     const { request } = useRequest();
-    const {notes, setNotes, setIsCreateNoteModalOpen, isLoading } =
+    const {notes, setNotes, setIsCreateNoteModalOpen, loadingNote } =
         useContext(NoteContext);
     const { tags, setTags, setIsCreateTagModalOpen, setTagModalValues } =
         useContext(TagContext);
@@ -67,7 +67,7 @@ export default function Home() {
 
                 <div className="flex justify-end items-center my-4">
                     <div className="flex items-center gap-3">
-                        {isLoading && (
+                        {loadingNote && (
                             <span className="loading loading-spinner loading-sm bg-lime-700"></span>
                         )}
                         <div className="dropdown dropdown-hover ">

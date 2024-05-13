@@ -13,7 +13,7 @@ export function NoteProvider({ children }) {
         tag: "",
     });
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [loadingNote, setLoadingNote] = useState(false);
 
     return (
         <NoteContext.Provider
@@ -21,11 +21,11 @@ export function NoteProvider({ children }) {
                 notes,
                 noteModalValues,
                 isCreateNoteModalOpen,
-                isLoading,
+                loadingNote,
                 setNotes,
                 setNoteModalValues,
                 setIsCreateNoteModalOpen,
-                setIsLoading,
+                setLoadingNote,
             }}
         >
             {children}
