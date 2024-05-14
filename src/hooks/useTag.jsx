@@ -30,7 +30,11 @@ const useTag = () => {
 
         closeTagModal();
 
-        if (newTag.name === "") return;
+        if (newTag.name === "") {
+            clearTagModalValues();
+            setLoadingTag(false);
+            return;
+        }
 
         setTags((prevTags) => [newTag, ...prevTags]);
 
@@ -51,11 +55,15 @@ const useTag = () => {
 
         closeTagModal();
 
-        if (updatedTag.name === "") return;
+        if (updatedTag.name === "") {
+            clearTagModalValues();
+            setLoadingTag(false);
+            return;
+        }
 
         const updatedTags = tags.map((tag) => {
             if (tag.id === tagId) {
-                return {...tag, ...updatedTag};
+                return { ...tag, ...updatedTag };
             }
             return tag;
         });
