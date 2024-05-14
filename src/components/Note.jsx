@@ -7,10 +7,14 @@ export default function Note({ id, title, description, tag, pinned }) {
     const { setNoteModalValues, setIsCreateNoteModalOpen } =
         useContext(NoteContext);
 
+    const { clearNoteModalValues } = useNote();
+
     const { showNoteModal } = useNote();
 
     function handleShowModal() {
         setIsCreateNoteModalOpen(false);
+
+        clearNoteModalValues();
 
         setNoteModalValues({
             id,

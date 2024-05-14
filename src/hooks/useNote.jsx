@@ -85,7 +85,7 @@ const useNote = () => {
 
         await request(`/notes/${noteId}/update`, {
             method: "put",
-            data: updateNote,
+            data: updatedNote,
         });
 
         setLoadingNote(false);

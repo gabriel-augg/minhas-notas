@@ -7,10 +7,12 @@ export default function Tag({ id, name }) {
     const { setTagModalValues, setIsCreateTagModalOpen } =
         useContext(TagContext);
 
-    const { deleteTag, showTagModal } = useTag();
+    const { deleteTag, showTagModal, clearTagModalValues } = useTag();
 
     function handleShowModal() {
         setIsCreateTagModalOpen(false);
+        
+        clearTagModalValues();
 
         setTagModalValues({
             id,
