@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://minhas-notas-api.onrender.com"
+    baseURL: import.meta.env.VITE_APP_API_URL,
 })
