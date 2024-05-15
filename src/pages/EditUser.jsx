@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Input from "../components/Input";
-import { EditSchema } from "../utils/schema";
+import { ESchema } from "../utils/schema";
 import AuthButton from "../components/AuthButton";
 
 const EditUser = () => {
@@ -13,7 +13,7 @@ const EditUser = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(EditSchema),
+        resolver: zodResolver(ESchema),
     });
 
     const { updateUser, user, loadingAuth } = useContext(UserContext);

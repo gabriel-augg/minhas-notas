@@ -3,9 +3,8 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Link } from "react-router-dom";
 import Input from "../components/Input";
-import { Loginchema } from "../utils/schema";
+import { LSchema } from "../utils/schema";
 import AuthButton from "../components/AuthButton";
 import Redirect from "../components/Redirect";
 
@@ -15,7 +14,7 @@ const Login = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(Loginchema),
+        resolver: zodResolver(LSchema),
     });
 
     const { signIn, loadingAuth } = useContext(UserContext);

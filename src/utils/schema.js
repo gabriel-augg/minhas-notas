@@ -22,12 +22,12 @@ const RSchema = z.object({
         .nonempty("A confirmação de senha é obrigatória."),
 });
 
-const Loginchema = z.object({
+const LSchema = z.object({
     email: z.string().email("Digite um email válido."),
     password: z.string().min(4, "A senha deve ter pelo menos 8 caracteres."),
 });
 
-const EditSchema = z.object({
+const ESchema = z.object({
     username: z
         .string()
         .min(3, "O nome de usuário deve ter pelo menos 3 caracteres.")
@@ -40,4 +40,4 @@ const EditSchema = z.object({
     confirmpassword: z.string(),
 });
 
-export { RSchema, EditSchema, Loginchema };
+export { RSchema, ESchema, LSchema };
