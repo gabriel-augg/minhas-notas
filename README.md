@@ -4,7 +4,7 @@ Apesar da evolução tecnológica, muitas pessoas ainda enfrentam dificuldades n
 
 Embora existam inúmeras soluções digitais disponíveis, desde aplicativos simples até softwares mais complexos, ainda há desafios em encontrar uma ferramenta que seja verdadeiramente eficiente e acessível para todos os usuários.
 
-Para testa o Minhas Notas, clique [aqui](https://minhas-notas-br.vercel.app).
+Para acessar o Minhas Notas, clique [aqui](https://minhas-notas-br.vercel.app).
 
 
 ##### **IMPORTANTE!**
@@ -67,13 +67,13 @@ npm install
 
 ### Configurando variável .env
 
-Crie um arquivo .env no raiz  do repositório e defina as seguinte variável para acesso a API do projeto
+Crie um arquivo .env no raiz do repositório e defina a seguinte variável para acesso a API do projeto
 
 ```yaml
 VITE_APP_API_URL="http://localhost:3000"
 ```
 
-Defina o valor da variável de ambiente de acordo com o caminho da API do projeto no seu computador/servidor.
+Defina o valor da variável de ambiente de acordo com o caminho da API no seu computador/servidor.
 
 
 ## Iniciando o projeto
