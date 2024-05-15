@@ -30,6 +30,7 @@ Cique [aqui](https://github.com/gabriel-augg/minhas-notas-api) para saber mais i
 
 - JavaScript
 - React 18.2.0
+- ContextAPI
 - Axios 1.6.8
 - Toastify 10.0.5
 - React-icons 5.1.0
