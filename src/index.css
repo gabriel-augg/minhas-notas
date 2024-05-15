@@ -14,8 +14,10 @@
     font-family: "Montserrat";
 }
 
-body,
-html,
+
+body {
+    background-color: #00441A;
+}
 #root {
-    background-color: #fff !important;
+    background-color: #fff;
 }
