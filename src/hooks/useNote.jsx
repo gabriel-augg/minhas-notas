@@ -3,6 +3,12 @@ import { NoteContext } from "../contexts/NoteContext";
 import useRequest from "./useRequest";
 import generateID from "../utils/generateID";
 
+/// ATENÇÃO: O código possui um sistema de loading implementado no projeto.
+/// Se a API estiver hospedada no localhost, o loading não será exibido.
+/// Se quiser testar o loading, hospede a API em um servidor externo 
+/// ou então implemente um delay nas requisições.
+
+
 const useNote = () => {
     const { noteModalValues, setNotes, setLoadingNote, setNoteModalValues } =
         useContext(NoteContext);
