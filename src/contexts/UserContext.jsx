@@ -14,6 +14,8 @@ export function UserProvider({ children }) {
         signUp,
         signIn,
         signOut,
+        updateUser,
+        deleteUser,
     } = useAuth();
 
     return (
@@ -27,6 +29,8 @@ export function UserProvider({ children }) {
                 signUp,
                 signIn,
                 signOut,
+                updateUser,
+                deleteUser,
             }}
         >
             {children}
