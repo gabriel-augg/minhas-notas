@@ -90,12 +90,13 @@ const useAuth = () => {
         }
     }
 
-    async function deleteUser() {
-        signOut();
-
-        await request("/users/delete", {
+    function deleteUser() {
+        request("/users/delete", {
             method: "delete",
         });
+
+        signOut();
+        navigate("/entrar");
     }
 
     return {

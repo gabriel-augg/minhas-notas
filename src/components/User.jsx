@@ -9,8 +9,7 @@ import { useNavigate } from "react-router-dom";
 import useRequest from "../hooks/useRequest";
 
 export default function User({ username }) {
-    const { signOut } = useContext(UserContext);
-    const { request } = useRequest();
+    const { deleteUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     function handleEditUser() {
@@ -18,12 +17,7 @@ export default function User({ username }) {
     }
 
     async function handleDeleteAccount() {
-        navigate("/entrar");
-        signOut();
-
-        await request("/users/delete", {
-            method: "delete",
-        });
+        deleteUser()
     }
 
     function handleLogout() {
