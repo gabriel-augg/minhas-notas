@@ -46,8 +46,7 @@ Para rodar a aplicação localmente, é necessério fazer clone do projeto e ins
 
 - Git
 - Node
-- NPM
-- MySQL
+- Npm
 
 ### Clonando o repositório e instalando as dependências
 
