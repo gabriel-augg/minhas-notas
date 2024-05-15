@@ -22,6 +22,10 @@ export default function Tag({ id, name }) {
         showTagModal();
     }
 
+    function handleDelete() {
+        deleteTag(id);
+    }
+
     return (
         <li>
             <div className="flex justify-between p-1">
@@ -32,7 +36,7 @@ export default function Tag({ id, name }) {
                     {name}
                 </button>
                 <button
-                    onClick={() => deleteTag(id)}
+                    onClick={handleDelete}
                     className="p-1 rounded-full hover:bg-red-200"
                 >
                     <FaTrash className="text-red-400" size={15} />

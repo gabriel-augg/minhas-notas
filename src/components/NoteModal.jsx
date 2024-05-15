@@ -26,6 +26,10 @@ export default function NoteModal() {
         }
     }
 
+    function handleDelete(){
+        deleteNote()
+    }
+
     function handleInput(e) {
         setNoteModalValues((prevValues) => ({
             ...prevValues,
@@ -110,7 +114,7 @@ export default function NoteModal() {
                         {!isCreateNoteModalOpen && (
                             <button
                                 type="button"
-                                onClick={deleteNote}
+                                onClick={handleDelete}
                                 className="hover:bg-red-100 p-2 rounded-full"
                             >
                                 <FaTrash
