@@ -65,15 +65,6 @@ cd minhas-notas
 npm install
 ```
 
-### Configurando variável .env
-
-Crie um arquivo .env no raiz  do repositório e defina as seguinte variável para acesso a API do projeto
-
-```yaml
-VITE_APP_API_URL="http://localhost:3000"
-```
-
-Defina o valor da variável de ambiente de acordo com o caminho da API do projeto no seu computador/servidor.
 
 ## Iniciando o projeto
 
